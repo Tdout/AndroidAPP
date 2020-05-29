@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation1"
+        android:icon="@drawable/ic_page"
+        android:title="页面1" />
+
+    <item
+    android:id="@+id/navigation2"
+    android:icon="@drawable/ic_page"
+    android:title="页面2" />
+
+    <item
+        android:id="@+id/navigation3"
+        android:icon="@drawable/ic_page"
+        android:title="页面3" />
+
+    <item
+        android:id="@+id/navigation4"
+        android:icon="@drawable/ic_page"
+        android:title="页面4" />
+
+</menu>

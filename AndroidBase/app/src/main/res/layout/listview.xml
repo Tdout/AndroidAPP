@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:clipToPadding="false"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:background="@drawable/shape_corner_up"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            >
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/list_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#666872" />
+            <TextView
+                android:id="@+id/list_major"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#666872" />
+            <TextView
+                android:id="@+id/list_class"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#666872" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:id="@+id/list_button_root"
+            android:gravity="right">
+            <Button
+                android:id="@+id/list_button"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:background="@drawable/shape_corner"
+                android:text="show more"
+                android:textSize="14dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="true"
+        android:padding="5dp"
+        android:background="@drawable/shape_corner_down"
+        android:orientation="vertical">
+            <TextView
+                android:clipToPadding="true"
+                android:padding="5dp"
+                android:id="@+id/info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#666872" />
+    </LinearLayout>
+
+</LinearLayout>

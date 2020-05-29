@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/back_gradient"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:id="@+id/top_panel"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="20sp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="#000000"
+            android:gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:textSize="20sp"
+            android:text="发现" />
+
+        <ImageView
+            android:id="@+id/add_button"
+            android:src="@drawable/ic_add"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:layout_alignParentEnd="true"
+            android:layout_height="wrap_content"
+            android:layout_width="40dp" />
+
+        <ImageView
+            android:id="@+id/search_button"
+            android:layout_toStartOf="@id/add_button"
+            android:src="@drawable/ic_search"
+            android:padding="10dp"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <com.MobileCourse.Components.WechatSubmenu
+        android:id="@+id/social_circle_menu"
+        app:src="@drawable/ic_social_circle"
+        app:text="朋友圈"
+        app:layout_constraintTop_toBottomOf="@id/top_panel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sub_menu_height" />
+
+    <com.MobileCourse.Components.WechatSubmenu
+        android:id="@+id/scan_menu"
+        app:src="@drawable/ic_scan"
+        app:text="扫一扫"
+        app:layout_constraintTop_toBottomOf="@id/social_circle_menu"
+        android:layout_marginTop="@dimen/sub_menu_gap"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sub_menu_height" />
+
+    <com.MobileCourse.Components.WechatSubmenu
+        android:id="@+id/swip_menu"
+        app:src="@drawable/ic_swip"
+        app:text="摇一摇"
+        app:layout_constraintTop_toBottomOf="@id/scan_menu"
+        android:background="@drawable/back_top_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sub_menu_height" />
+
+    <com.MobileCourse.Components.WechatSubmenu
+        android:id="@+id/look_menu"
+        app:src="@drawable/ic_have_look"
+        app:text="看一看"
+        app:layout_constraintTop_toBottomOf="@id/swip_menu"
+        android:background="#ffffff"
+        android:layout_marginTop="@dimen/sub_menu_gap"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sub_menu_height" />
+
+    <com.MobileCourse.Components.WechatSubmenu
+        android:id="@+id/search_menu"
+        app:src="@drawable/ic_search_and_search"
+        app:text="搜一搜"
+        app:layout_constraintTop_toBottomOf="@id/look_menu"
+        android:background="@drawable/back_top_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sub_menu_height" />
+
+    <com.MobileCourse.Components.WechatSubmenu
+        android:id="@+id/people_nearby_menu"
+        app:src="@drawable/ic_people_nearby"
+        app:text="附近的人"
+        app:layout_constraintTop_toBottomOf="@id/search_menu"
+        android:background="#ffffff"
+        android:layout_marginTop="@dimen/sub_menu_gap"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sub_menu_height" />
+
+    <com.MobileCourse.Components.WechatSubmenu
+        android:id="@+id/shop_menu"
+        app:src="@drawable/ic_shop"
+        app:text="购物"
+        app:layout_constraintTop_toBottomOf="@id/people_nearby_menu"
+        android:background="#ffffff"
+        android:layout_marginTop="@dimen/sub_menu_gap"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sub_menu_height" />
+
+    <com.MobileCourse.Components.WechatSubmenu
+        android:id="@+id/game_menu"
+        app:src="@drawable/ic_game"
+        app:text="游戏"
+        app:layout_constraintTop_toBottomOf="@id/shop_menu"
+        android:background="@drawable/back_top_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sub_menu_height" />
+
+    <com.MobileCourse.Components.WechatSubmenu
+        android:id="@+id/applets_menu"
+        app:src="@drawable/ic_applets"
+        app:text="小程序"
+        app:layout_constraintTop_toBottomOf="@id/game_menu"
+        android:background="#ffffff"
+        android:layout_marginTop="@dimen/sub_menu_gap"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sub_menu_height" />
+
+    <LinearLayout
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_menu_height">
+
+        <LinearLayout
+            android:id="@+id/wechat_menu"
+            android:background="#f8f8f8"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:paddingTop="@dimen/bottom_menu_padding"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/bottom_menu_height">
+
+            <ImageView
+                android:src="@drawable/ic_wechat"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/bottom_menu_icon_height" />
+
+            <TextView
+                android:text="微信"
+                android:textSize="@dimen/bottom_menu_text_size"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/address_book_menu"
+            android:background="#f8f8f8"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:paddingTop="@dimen/bottom_menu_padding"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/bottom_menu_height">
+
+            <ImageView
+                android:src="@drawable/ic_address_book"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/bottom_menu_icon_height" />
+
+            <TextView
+                android:text="通讯录"
+                android:textSize="@dimen/bottom_menu_text_size"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/find_menu"
+            android:background="#f8f8f8"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:paddingTop="@dimen/bottom_menu_padding"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/bottom_menu_height">
+
+            <ImageView
+                android:src="@drawable/ic_find"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/bottom_menu_icon_height" />
+
+            <TextView
+                android:text="发现"
+                android:textColor="#008000"
+                android:textSize="@dimen/bottom_menu_text_size"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/about_me_menu"
+            android:background="#f8f8f8"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:paddingTop="@dimen/bottom_menu_padding"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/bottom_menu_height">
+
+            <ImageView
+                android:src="@drawable/ic_about_me"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/bottom_menu_icon_height" />
+
+            <TextView
+                android:text="我"
+                android:textSize="@dimen/bottom_menu_text_size"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
