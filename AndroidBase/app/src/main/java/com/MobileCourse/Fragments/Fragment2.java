@@ -12,10 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.MobileCourse.Components.WechatSubmenu;
-import com.MobileCourse.FalseWechat.FalseWeChat;
+import com.MobileCourse.FalseWechat.ShowMorePage;
 import com.MobileCourse.R;
-import com.MobileCourse.TemplateActivity1;
 
 public class Fragment2 extends Fragment {
 
@@ -43,7 +41,7 @@ public class Fragment2 extends Fragment {
         View inflate = inflater.inflate(R.layout.fragment_2, container, false);
         ButterKnife.bind(this, inflate);
         btn.setOnClickListener(view -> {
-            Intent intent = new Intent(getActivity(), FalseWeChat.class);
+            Intent intent = new Intent(getActivity(), ShowMorePage.class);
             startActivity(intent);
         });
         if (!showBtn)

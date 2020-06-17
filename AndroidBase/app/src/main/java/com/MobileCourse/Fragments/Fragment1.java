@@ -19,7 +19,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.MobileCourse.Adapter.ListViewAdapter;
-import com.MobileCourse.FalseWechat.FalseWeChat;
+import com.MobileCourse.FalseWechat.ShowMorePage;
 import com.MobileCourse.R;
 import com.bumptech.glide.Glide;
 import com.youth.banner.Banner;
@@ -42,6 +42,8 @@ public class Fragment1 extends Fragment {
     private LocalImageLoader mImageLoader;
     private ArrayList<String> imagePath;
     private ArrayList<String> imageTitle;
+    public static final String ID_MESSAGE
+            = "com.example.android.showmore.extra.MESSAGE";
     // 列表
     public final class Data{
         public String image;
@@ -50,6 +52,7 @@ public class Fragment1 extends Fragment {
         public String list_class;
         public String info;
         public String ID;
+
     }
     private ListView mListView;
     private ArrayList<String> ListTitle;
@@ -97,10 +100,10 @@ public class Fragment1 extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(), "点击时间-SHOWMORE: " + ListData.get(i).ID, Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "点击时间-SHOWMORE: " + ListData.get(i).ID, Toast.LENGTH_SHORT).show();
                 System.out.println("获取的ID： " + ListData.get(i).ID);
-                Intent intent = new Intent(getActivity(), FalseWeChat.class);
-                intent.putExtra("ID", ListData.get(i).ID);
+                Intent intent = new Intent(getActivity(), ShowMorePage.class);
+                intent.putExtra(ID_MESSAGE, ListData.get(i).ID);
                 startActivity(intent);
             }
         });
@@ -133,7 +136,7 @@ public class Fragment1 extends Fragment {
             @Override
             public void OnBannerClick(int position) {
                 //轮播页点击事件--跳转页面
-                Toast.makeText(getActivity(), "点击事件-轮播页" + (position+1), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "点击事件-轮播页" + (position+1), Toast.LENGTH_SHORT).show();
                 //Toast.makeText(Fragment1.this, "sa"+(position+1), Toast.LENGTH_LONG);
             }
         });
