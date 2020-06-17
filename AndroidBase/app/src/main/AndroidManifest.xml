@@ -25,7 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FalseWechat.FalseWeChat" />
+        <activity android:name=".FalseWechat.ShowMorePage" />
         <activity android:name=".FalseWechat.FalseWeChat2" />
         <activity android:name=".TemplateActivity1" />
     </application>
