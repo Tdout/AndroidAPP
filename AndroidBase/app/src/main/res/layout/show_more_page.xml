@@ -1,32 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#ffffff"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/back_gradient"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ImageView
-        android:id="@+id/sub_menu_icon"
-        android:scaleType="fitCenter"
-        android:layout_marginStart="@dimen/sub_menu_text_margin"
-        android:padding="@dimen/sub_menu_icon_padding"
-        android:layout_width="@dimen/sub_menu_icon_height"
-        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:id="@+id/top_panel"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp">
 
-    <TextView
-        android:id="@+id/sub_menu_text"
-        android:layout_toEndOf="@id/sub_menu_icon"
-        android:layout_marginStart="@dimen/sub_menu_text_margin"
-        android:textColor="@color/sub_menu_text_color"
-        android:gravity="center_vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/userImage"
+            android:src="@drawable/ic_people_nearby"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:layout_height="100dp"
+            android:layout_width="100dp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_toRightOf="@id/userImage"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/show_name"
+                android:text="昵称: "
+                android:paddingTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#00000F" />
+            <TextView
+                android:id="@+id/show_ID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#00000F" />
+        </LinearLayout>
 
-    <ImageView
-        android:src="@drawable/ic_right_arrow"
-        android:layout_alignParentEnd="true"
-        android:scaleType="fitCenter"
-        android:padding="@dimen/sub_menu_arrow_padding"
-        android:layout_width="@dimen/sub_menu_icon_height"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="关注+"
+            android:padding="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/shape_corner"
+            android:layout_alignParentEnd="true" />
 
-</RelativeLayout>
+        <View  android:layout_height="2px"
+            android:layout_width="match_parent"
+            android:layout_marginTop="90dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="#00000F"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/research_dir"
+        app:layout_constraintTop_toBottomOf="@id/top_panel"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sub_menu_height">
+        <TextView
+            android:text="研究方向： "
+            android:layout_marginStart="@dimen/sub_menu_text_margin"
+            android:textColor="@color/sub_menu_text_color"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <ListView
+            android:layout_marginStart="@dimen/sub_menu_text_margin"
+            android:textColor="@color/sub_menu_text_color"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/skill"
+        app:layout_constraintTop_toBottomOf="@id/research_dir"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sub_menu_height">
+        <TextView
+            android:text="技能： "
+            android:layout_marginStart="@dimen/sub_menu_text_margin"
+            android:textColor="@color/sub_menu_text_color"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/exp"
+        app:layout_constraintTop_toBottomOf="@id/skill"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sub_menu_height">
+        <TextView
+            android:text="经验： "
+            android:layout_marginStart="@dimen/sub_menu_text_margin"
+            android:textColor="@color/sub_menu_text_color"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
