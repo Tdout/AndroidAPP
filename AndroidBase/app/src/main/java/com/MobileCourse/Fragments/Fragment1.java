@@ -140,9 +140,10 @@ public class Fragment1 extends Fragment {
                             System.out.println(object);
                             e.list_name = object.getString("name");
                             e.list_major = object.getString("major");
-                            e.list_class = object.getString("class");
+                            //e.list_class = object.getString("class");
                             e.ID = object.getString("id");
                             e.info = object.getString("info");
+
                             ListData.add(e);
                             System.out.println(ListData.get(i).list_name);
                         }

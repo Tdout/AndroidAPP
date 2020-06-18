@@ -27,7 +27,7 @@ public class TemplateActivity1 extends AppCompatActivity {
     Fragment fragment1 = new Fragment1();
     Fragment fragment2 = new Fragment2(false);
     Fragment fragment3 = new Fragment3(false);
-    Fragment fragment4 = new Fragment4(false);
+    Fragment fragment4 = new Fragment4();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
