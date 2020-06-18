@@ -291,14 +291,12 @@ public class Fragment1 extends Fragment {
                 e.info = "INFO";
                 ListData.add(e);
             }
-            System.out.println(ListData.get(0).list_name);
         }
         List<Map<String, Object>> list=new ArrayList<Map<String,Object>>();
         for (int i = 0; i < ListData.size(); i++) {
             Map<String, Object> map=new HashMap<String, Object>();
             map.put("image", R.drawable.ic_people_nearby); // 图片获取
             map.put("list_name","Name: " + ListData.get(i).list_name);
-            System.out.println(ListData.get(i).list_name);
             map.put("list_major", "Major: " + ListData.get(i).list_major);
             map.put("list_class", "Class: " + ListData.get(i).list_class);
             map.put("info", "Interests: " + ListData.get(i).info);

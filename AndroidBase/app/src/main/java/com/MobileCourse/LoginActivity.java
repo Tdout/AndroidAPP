@@ -110,7 +110,7 @@ public class LoginActivity extends AppCompatActivity  {
 //                }else{
 //                    Toast.makeText(LoginActivity.this, "此用户名不存在", Toast.LENGTH_SHORT).show();
 //                }
-                new Thread(new Runnable() {
+                Thread t = new Thread(new Runnable() {
                     @Override
                     public void run() {
                         try {
@@ -150,7 +150,13 @@ public class LoginActivity extends AppCompatActivity  {
                             System.out.println("failed");
                         }
                     }
-                }).start();
+                });
+                t.start();
+                try {
+                    t.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 //一致登录成功
                 if (Integer.valueOf(result) == 1) {
                     Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();

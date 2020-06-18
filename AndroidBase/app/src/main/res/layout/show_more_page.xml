@@ -102,6 +102,7 @@
         android:layout_height="@dimen/sub_menu_height">
         <TextView
             android:text="经验： "
+            android:id="@+id/Exp_list"
             android:layout_marginStart="@dimen/sub_menu_text_margin"
             android:textColor="@color/sub_menu_text_color"
             android:gravity="center_vertical"

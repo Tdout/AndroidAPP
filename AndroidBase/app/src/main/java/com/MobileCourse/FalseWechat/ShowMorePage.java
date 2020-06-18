@@ -51,7 +51,7 @@ public class ShowMorePage extends Activity implements View.OnClickListener {
             Exp = new ArrayList<>();
             Exp.add("EXP: " + i);
         }
-        for(int i=0;i<40;i++){
+        for(int i=0;i<Exp.size();i++){
             //定义一个临时的hashMap
             HashMap<String,String> hashMap = new HashMap<String, String>();
             hashMap.put("Exp","user_"+ Exp.get(i));
