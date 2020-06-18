@@ -41,7 +41,6 @@
             android:layout_height="wrap_content" />
 
     </RelativeLayout>
-
     <com.MobileCourse.Components.WechatSubmenu
         android:id="@+id/social_circle_menu"
         app:src="@drawable/ic_social_circle"
