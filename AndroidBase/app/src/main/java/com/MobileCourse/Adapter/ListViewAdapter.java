@@ -29,7 +29,7 @@ public class ListViewAdapter extends BaseAdapter {
      * 组件集合，对应list.xml中的控件
      * @author Administrator
      */
-    public final class Zujian{
+    public final class myList{
         public ImageView image;
         public TextView list_name;
         public TextView list_major;
@@ -58,28 +58,28 @@ public class ListViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Zujian zujian=null;
+        myList mList=null;
         if(convertView==null){
-            zujian=new Zujian();
+            mList=new myList();
             //获得组件，实例化组件
             convertView=layoutInflater.inflate(R.layout.listview, null);
-            zujian.image=(ImageView)convertView.findViewById(R.id.image);
-            zujian.list_name=(TextView)convertView.findViewById(R.id.list_name);
-            zujian.list_major=(TextView)convertView.findViewById(R.id.list_major);
-            zujian.list_class=(TextView)convertView.findViewById(R.id.list_class);
-            zujian.list_button=(Button)convertView.findViewById(R.id.list_button);
-            zujian.info=(TextView)convertView.findViewById(R.id.info);
-            convertView.setTag(zujian);
+            mList.image=(ImageView)convertView.findViewById(R.id.image);
+            mList.list_name=(TextView)convertView.findViewById(R.id.list_name);
+            mList.list_major=(TextView)convertView.findViewById(R.id.list_major);
+            mList.list_class=(TextView)convertView.findViewById(R.id.list_class);
+            mList.list_button=(Button)convertView.findViewById(R.id.list_button);
+            mList.info=(TextView)convertView.findViewById(R.id.info);
+            convertView.setTag(mList);
         }else{
-            zujian=(Zujian)convertView.getTag();
+            mList=(myList) convertView.getTag();
         }
         //绑定数据
 
-        zujian.image.setBackgroundResource((Integer)data.get(position).get("image"));
-        zujian.list_name.setText((String)data.get(position).get("list_name"));
-        zujian.list_major.setText((String)data.get(position).get("list_major"));
-        zujian.list_class.setText((String)data.get(position).get("list_class"));
-        zujian.info.setText((String)data.get(position).get("info"));
+        mList.image.setBackgroundResource((Integer)data.get(position).get("image"));
+        mList.list_name.setText((String)data.get(position).get("list_name"));
+        mList.list_major.setText((String)data.get(position).get("list_major"));
+        mList.list_class.setText((String)data.get(position).get("list_class"));
+        mList.info.setText((String)data.get(position).get("info"));
         return convertView;
     }
 

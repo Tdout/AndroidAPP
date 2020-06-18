@@ -54,6 +54,11 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.navigation)
     BottomNavigationView navigationMenu;
 
+    // 全局变量设置
+    public static String global_url = "http://47.99.112.121";
+    public static String global_port = "80";
+    public static int global_login_type = 1;
+    public static String global_login_id = "aaa";
 
 
     public static Handler msgHandler;
@@ -63,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         // 自动绑定view
         ButterKnife.bind(this);
 

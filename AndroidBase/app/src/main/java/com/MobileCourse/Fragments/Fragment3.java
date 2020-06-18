@@ -39,13 +39,7 @@ public class Fragment3 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_2, container, false);
-        ButterKnife.bind(this, inflate);
-        btn.setOnClickListener(view -> {
-            Intent intent = new Intent(getActivity(), TemplateActivity1.class);
-            startActivity(intent);
-        });
-        if (!showBtn)
-            btn.setVisibility(View.INVISIBLE);
+
         return inflate;
     }
 }

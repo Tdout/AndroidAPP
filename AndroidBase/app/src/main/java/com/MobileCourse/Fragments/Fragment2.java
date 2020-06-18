@@ -19,13 +19,13 @@ public class Fragment2 extends Fragment {
 
     @BindView(R.id.btn)
     Button btn;
-    
+
     private boolean showBtn = true;
-    
+
     public Fragment2() {
         // Required empty public constructor
     }
-    
+
     // 控制是否展示对应的按钮
     public Fragment2(boolean showBtn) {
         this.showBtn = showBtn;

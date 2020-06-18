@@ -16,7 +16,7 @@ import com.MobileCourse.utils.CommonInterface;
 
 public class FalseWeChat extends Activity implements View.OnClickListener {
 
-    @BindView(R.id.img_social_circle)ImageView social_circle;
+    @BindView(R.id.social_circle_menu)ImageView social_circle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
