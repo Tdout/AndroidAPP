@@ -15,16 +15,21 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -34,9 +39,9 @@ public class RegisterActivity extends AppCompatActivity {
     private RadioButton teacher, student;//身份选择按钮
     private int identify_num;//身份数：老师为1，学生为2
     //用户名，密码，再次输入的密码的控件
-    private EditText et_user_name,et_psw,et_psw_again,et_username;
+    private EditText et_user_name,et_psw,et_psw_again,et_username, et_school;
     //用户名，密码，再次输入的密码的控件的获取值
-    private String userName,psw,pswAgain,Name;
+    private String userName,psw,pswAgain,Name,school;
     //标题布局
     private RelativeLayout rl_title_bar;
     private String RegisterAddress = "http://47.99.112.121/register";
@@ -62,6 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
         btn_register=findViewById(R.id.btn_register);
         et_user_name=findViewById(R.id.et_user_name);
         et_username = findViewById(R.id.et_username);
+        et_school = findViewById(R.id.et_school);
         et_psw=findViewById(R.id.et_psw);
         et_psw_again=findViewById(R.id.et_psw_again);
         teacher = findViewById(R.id.teacher);
@@ -82,6 +88,8 @@ public class RegisterActivity extends AppCompatActivity {
                 psw=et_psw.getText().toString().trim();
                 pswAgain=et_psw_again.getText().toString().trim();
                 Name = et_username.getText().toString().trim();
+                school = et_school.getText().toString().trim();
+
                 //判断输入框内容
                 if(TextUtils.isEmpty(userName)){
                     Toast.makeText(RegisterActivity.this, "请输入用户名", Toast.LENGTH_SHORT).show();
@@ -94,6 +102,9 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }else if(TextUtils.isEmpty(Name)) {
                     Toast.makeText(RegisterActivity.this, "请输入真实姓名", Toast.LENGTH_SHORT).show();
+                    return;
+                }else if(TextUtils.isEmpty(school)) {
+                    Toast.makeText(RegisterActivity.this, "请输入学校", Toast.LENGTH_SHORT).show();
                     return;
                 }else if(!psw.equals(pswAgain)){
                     Toast.makeText(RegisterActivity.this, "输入两次的密码不一样", Toast.LENGTH_SHORT).show();
@@ -123,15 +134,16 @@ public class RegisterActivity extends AppCompatActivity {
                     // 表示此页面下的内容操作成功将data返回到上一页面，如果是用back返回过去的则不存在用setResult传递data值
                     RegisterActivity.this.finish();
                 }
-
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         try {
+                            BufferedReader reader = null;
                             JSONObject userJSON = new JSONObject();
-                            userJSON.put("userName", userName);
-                            userJSON.put("Name", Name);
-                            userJSON.put("psw", psw);
+                            userJSON.put("user_id", userName);
+                            userJSON.put("name", Name);
+                            userJSON.put("password", psw);
+                            userJSON.put("school", school);
                             if(teacher.isChecked()) {
                                 userJSON.put("identity",1);
                             }else if(student.isChecked()) {
@@ -142,15 +154,26 @@ public class RegisterActivity extends AppCompatActivity {
                             connection.setConnectTimeout(5000);
                             connection.setRequestMethod("POST");
                             connection.setDoOutput(true);
-                            connection.setRequestProperty("User-Agent", "Fiddler");
+                            connection.setDoInput(true);
+                            connection.setRequestProperty("Connection", "Keep-Alive");
                             connection.setRequestProperty("Content-Type", "application/json");
                             connection.setRequestProperty("Charset", "UTF-8");
-                            OutputStream os = connection.getOutputStream();
-                            os.write(content.getBytes());
-                            os.close();
-                            Log.i("success","成功注册");
+                            connection.setRequestProperty("accept","application/json");
+                            if(content != null && !TextUtils.isEmpty(content)) {
+                                byte[] writebytes = content.getBytes();
+                                connection.setRequestProperty("Content-Length",String.valueOf(writebytes.length));
+                                OutputStream os = connection.getOutputStream();
+                                os.write(content.getBytes());
+                                os.flush();
+                                os.close();
+                            }
+                            if(connection.getResponseCode() == 200) {
+                                reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                                String result = reader.readLine();
+                                System.out.println(result);
+                            }
                         }catch (Exception e){
-
+                            System.out.println("failed");
                         }
                     }
                 }).start();

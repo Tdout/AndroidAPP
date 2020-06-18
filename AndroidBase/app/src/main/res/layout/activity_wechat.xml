@@ -59,6 +59,44 @@
             android:background="#00000F"/>
     </RelativeLayout>
 
+<<<<<<< HEAD
+=======
+    <RelativeLayout
+        android:id="@+id/social_circle_menu"
+        app:layout_constraintTop_toBottomOf="@id/top_panel"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sub_menu_height">
+
+        <ImageView
+            android:id="@+id/img_social_circle"
+            android:src="@drawable/ic_social_circle"
+            android:scaleType="fitCenter"
+            android:layout_marginStart="@dimen/sub_menu_text_margin"
+            android:padding="@dimen/sub_menu_icon_padding"
+            android:layout_width="@dimen/sub_menu_icon_height"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_toEndOf="@id/img_social_circle"
+            android:text="朋友圈"
+            android:layout_marginStart="@dimen/sub_menu_text_margin"
+            android:textColor="@color/sub_menu_text_color"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:src="@drawable/ic_right_arrow"
+            android:layout_alignParentEnd="true"
+            android:scaleType="fitCenter"
+            android:padding="@dimen/sub_menu_arrow_padding"
+            android:layout_width="@dimen/sub_menu_icon_height"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+>>>>>>> 5235d3ed986e968d4d29a32224af0e6606e46fff
     <RelativeLayout
         android:id="@+id/research_dir"
         app:layout_constraintTop_toBottomOf="@id/top_panel"
