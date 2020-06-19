@@ -57,8 +57,8 @@ public class MainActivity extends AppCompatActivity {
     // 全局变量设置
     public static String global_url = "http://47.99.112.121";
     public static String global_port = "80";
-    public static int global_login_type = 1;
-    public static String global_login_id = "aaa";
+    public static int global_login_type ;
+    public static String global_login_id ;
 
 
     public static Handler msgHandler;
