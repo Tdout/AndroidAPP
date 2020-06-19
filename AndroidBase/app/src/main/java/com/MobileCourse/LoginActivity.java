@@ -110,55 +110,56 @@ public class LoginActivity extends AppCompatActivity  {
 //                }else{
 //                    Toast.makeText(LoginActivity.this, "此用户名不存在", Toast.LENGTH_SHORT).show();
 //                }
-                Thread t = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            BufferedReader reader = null;
-                            JSONObject userJSON = new JSONObject();
-                            userJSON.put("user_id", userName);
-                            userJSON.put("password", psw);
-                            if (login_teacher.isChecked()) {
-                                userJSON.put("identity", 1);
-                            } else if (login_student.isChecked()) {
-                                userJSON.put("identity", 2);
-                            }
-                            String content = String.valueOf(userJSON);
-                            HttpURLConnection connection = (HttpURLConnection) new URL(LoginAddress).openConnection();
-                            connection.setConnectTimeout(5000);
-                            connection.setRequestMethod("POST");
-                            connection.setDoOutput(true);
-                            connection.setDoInput(true);
-                            connection.setRequestProperty("Connection", "Keep-Alive");
-                            connection.setRequestProperty("Content-Type", "application/json");
-                            connection.setRequestProperty("Charset", "UTF-8");
-                            connection.setRequestProperty("accept", "application/json");
-                            if (content != null && !TextUtils.isEmpty(content)) {
-                                byte[] writebytes = content.getBytes();
-                                connection.setRequestProperty("Content-Length", String.valueOf(writebytes.length));
-                                OutputStream os = connection.getOutputStream();
-                                os.write(content.getBytes());
-                                os.flush();
-                                os.close();
-                            }
-                            if (connection.getResponseCode() == 200) {
-                                reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                                result = reader.readLine();
-                                System.out.println(result);
-                            }
-                        } catch (Exception e) {
-                            System.out.println("failed");
-                        }
-                    }
-                });
-                t.start();
-                try {
-                    t.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+//                Thread t = new Thread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        try {
+//                            BufferedReader reader = null;
+//                            JSONObject userJSON = new JSONObject();
+//                            userJSON.put("user_id", userName);
+//                            userJSON.put("password", psw);
+//                            if (login_teacher.isChecked()) {
+//                                userJSON.put("identity", 1);
+//                            } else if (login_student.isChecked()) {
+//                                userJSON.put("identity", 2);
+//                            }
+//                            String content = String.valueOf(userJSON);
+//                            HttpURLConnection connection = (HttpURLConnection) new URL(LoginAddress).openConnection();
+//                            connection.setConnectTimeout(5000);
+//                            connection.setRequestMethod("POST");
+//                            connection.setDoOutput(true);
+//                            connection.setDoInput(true);
+//                            connection.setRequestProperty("Connection", "Keep-Alive");
+//                            connection.setRequestProperty("Content-Type", "application/json");
+//                            connection.setRequestProperty("Charset", "UTF-8");
+//                            connection.setRequestProperty("accept", "application/json");
+//                            if (content != null && !TextUtils.isEmpty(content)) {
+//                                byte[] writebytes = content.getBytes();
+//                                connection.setRequestProperty("Content-Length", String.valueOf(writebytes.length));
+//                                OutputStream os = connection.getOutputStream();
+//                                os.write(content.getBytes());
+//                                os.flush();
+//                                os.close();
+//                            }
+//                            if (connection.getResponseCode() == 200) {
+//                                reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+//                                result = reader.readLine();
+//                                System.out.println(result);
+//                            }
+//                        } catch (Exception e) {
+//                            System.out.println("failed");
+//                        }
+//                    }
+//                });
+//                t.start();
+//                try {
+//                    t.join();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
                 //一致登录成功
-                if (Integer.valueOf(result) == 1) {
+                //if (Integer.valueOf(result) == 1) {
+                if (true) {
                     Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                     //保存登录状态，在界面保存登录的用户名 定义个方法 saveLoginStatus boolean 状态 , userName 用户名;
                     //saveLoginStatus(true, userName);
