@@ -59,56 +59,72 @@
             android:background="#00000F"/>
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/research_dir"
-        app:layout_constraintTop_toBottomOf="@id/top_panel"
-        android:background="#ffffff"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/sub_menu_height">
-        <TextView
-            android:text="研究方向： "
-            android:layout_marginStart="@dimen/sub_menu_text_margin"
-            android:textColor="@color/sub_menu_text_color"
-            android:gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-        <ListView
-            android:layout_marginStart="@dimen/sub_menu_text_margin"
-            android:textColor="@color/sub_menu_text_color"
-            android:gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-    </RelativeLayout>
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/research_dir"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/top_panel"-->
+<!--        android:background="#ffffff"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="@dimen/sub_menu_height">-->
+<!--        <TextView-->
+<!--            android:text="研究方向： "-->
+<!--            android:layout_marginStart="@dimen/sub_menu_text_margin"-->
+<!--            android:textColor="@color/sub_menu_text_color"-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent" />-->
+<!--    </RelativeLayout>-->
 
-    <RelativeLayout
-        android:id="@+id/skill"
-        app:layout_constraintTop_toBottomOf="@id/research_dir"
-        android:background="#ffffff"
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/skill"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/research_dir"-->
+<!--        android:background="#ffffff"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="@dimen/sub_menu_height">-->
+<!--        <TextView-->
+<!--            android:text="技能： "-->
+<!--            android:layout_marginStart="@dimen/sub_menu_text_margin"-->
+<!--            android:textColor="@color/sub_menu_text_color"-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent" />-->
+<!--    </RelativeLayout>-->
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/exp"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/skill"-->
+<!--        android:background="#ffffff"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="@dimen/sub_menu_height">-->
+<!--        <TextView-->
+<!--            android:text="经验： "-->
+<!--            android:layout_marginStart="@dimen/sub_menu_text_margin"-->
+<!--            android:textColor="@color/sub_menu_text_color"-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent" />-->
+<!--    </RelativeLayout>-->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/sub_menu_height">
-        <TextView
-            android:text="技能： "
-            android:layout_marginStart="@dimen/sub_menu_text_margin"
-            android:textColor="@color/sub_menu_text_color"
-            android:gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/exp"
-        app:layout_constraintTop_toBottomOf="@id/skill"
-        android:background="#ffffff"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/sub_menu_height">
-        <TextView
-            android:text="经验： "
-            android:id="@+id/Exp_list"
-            android:layout_marginStart="@dimen/sub_menu_text_margin"
-            android:textColor="@color/sub_menu_text_color"
-            android:gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/top_panel">
+        <ScrollView
+            android:id="@+id/scrollview"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="100dp"
+            android:fadingEdge="none"
+            app:layout_constraintTop_toBottomOf="@id/top_panel"
+            app:layout_constraintStart_toStartOf="parent"
+            android:scrollbars="vertical">
+            <LinearLayout
+                android:id="@+id/linearlayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
 
 
 

@@ -138,6 +138,7 @@ public class Fragment1 extends Fragment {
                             Data e = new Data();
                             JSONObject object=user_list.getJSONObject(i);
                             System.out.println(object);
+                            e.image = object.getString("url");
                             e.list_name = object.getString("name");
                             e.list_major = object.getString("major");
                             //e.list_class = object.getString("class");
@@ -155,8 +156,6 @@ public class Fragment1 extends Fragment {
                         Looper.loop();
                     }
                 }
-                System.out.println(ListData.get(0).list_name);
-                System.out.println(ListData.get(1).list_name);
             }
         };
         t.start();
@@ -297,10 +296,15 @@ public class Fragment1 extends Fragment {
         for (int i = 0; i < ListData.size(); i++) {
             Map<String, Object> map=new HashMap<String, Object>();
             map.put("image", R.drawable.ic_people_nearby); // 图片获取
+            //map.put("image", ListData.get(i).image); // 图片获取
             map.put("list_name","Name: " + ListData.get(i).list_name);
             map.put("list_major", "Major: " + ListData.get(i).list_major);
-            map.put("list_class", "Class: " + ListData.get(i).list_class);
-            map.put("info", "Interests: " + ListData.get(i).info);
+            map.put("list_class", ListData.get(i).list_class);
+            if(ListData.get(i).info.length() > 20){
+                map.put("info", "info: " + ListData.get(i).info.substring(0,20));
+            }
+            else
+                map.put("info", "Interests: " + ListData.get(i).info);
             list.add(map);
         }
         return list;
