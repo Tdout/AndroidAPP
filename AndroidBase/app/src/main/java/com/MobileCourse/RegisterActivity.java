@@ -112,9 +112,7 @@ public class RegisterActivity extends AppCompatActivity {
                     /**
                      *从SharedPreferences中读取输入的用户名，判断SharedPreferences中是否有此用户名
                      */
-                }else if(isExistUserName(userName)){
-                    Toast.makeText(RegisterActivity.this, "此账户名已经存在", Toast.LENGTH_SHORT).show();
-                    return;
+
                 }else if(!teacher.isChecked() && !student.isChecked()) {
                     Toast.makeText(RegisterActivity.this, "请选择身份", Toast.LENGTH_SHORT).show();
                     return;

@@ -14,10 +14,10 @@ import com.MobileCourse.R;
 import com.MobileCourse.TemplateActivity1;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 public class Fragment4 extends Fragment {
 
@@ -69,7 +69,7 @@ public class Fragment4 extends Fragment {
                 .into(mHBack);
         //设置圆形图像
         Glide.with(this).load(R.drawable.head)
-                .apply(new RequestOptions().transform(new CropCircleTransformation()))
+                .apply(new RequestOptions().transform(new CircleCrop()))
                 .into(mHHead);
 
         //设置用户名整个item的点击事件

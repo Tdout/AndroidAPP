@@ -1,6 +1,7 @@
 package com.MobileCourse.Fragments;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -11,6 +12,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
+
 import com.MobileCourse.R;
 
 public class ItemView extends LinearLayout {
@@ -83,7 +87,8 @@ public class ItemView extends LinearLayout {
 
     //设置左侧图标
     public void setLeftIcon(int value) {
-        Drawable drawable=getResources().getDrawable(value);
+//        Drawable drawable= getResources().getDrawable(value);
+        Drawable drawable = ResourcesCompat.getDrawable(getResources(),value, null);
         leftIcon.setBackground(drawable);
     }
 

@@ -147,7 +147,7 @@ public class LoginActivity extends AppCompatActivity  {
                             if (connection.getResponseCode() == 200) {
                                 reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                                 result = reader.readLine();
-                                System.out.println(result);
+                                //System.out.println(result);
                             }
                         } catch (Exception e) {
                             System.out.println("failed");
@@ -178,11 +178,11 @@ public class LoginActivity extends AppCompatActivity  {
                         //销毁登录界面
                         LoginActivity.this.finish();
                         //跳转到主界面，登录成功的状态传递到 MainActivity 中
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        startActivity(new Intent(LoginActivity.this, FlagActivity.class));
                         return;
                     }
                     else {
-                        Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "账号或密码错误", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
