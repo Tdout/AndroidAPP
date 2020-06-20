@@ -39,21 +39,21 @@
                 android:background="@android:color/white" />
 
             <TextView
-                android:id="@+id/user_name"
+                android:id="@+id/center_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@id/user_line"
-                android:text="张三"
+
                 android:textColor="@android:color/white"
                 android:textSize="17sp" />
 
             <TextView
-                android:id="@+id/user_val"
+                android:id="@+id/center_user_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@id/user_line"
-                android:text="182****5882"
+
                 android:textColor="@android:color/white"
                 android:textSize="17sp" />
         </RelativeLayout>
@@ -61,12 +61,12 @@
     </RelativeLayout>
 
     <com.MobileCourse.Fragments.ItemView
-        android:id="@+id/nickName"
+        android:id="@+id/center_user_info"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         app:left_icon="@drawable/ic_nick_name"
         app:left_text="个人信息"
-        app:right_text=""
+        app:right_text="查看或修改"
         />
 
     <com.MobileCourse.Fragments.ItemView
@@ -107,20 +107,20 @@
 <!--        app:right_text="xxx@163.com" />-->
 
     <com.MobileCourse.Fragments.ItemView
-        android:id="@+id/pass"
+        android:id="@+id/center_pass"
         android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         app:left_icon="@drawable/ic_pass"
-        app:left_text="修改密码"
-        app:right_text="" />
+        app:left_text="密码"
+        app:right_text="修改密码" />
     <com.MobileCourse.Fragments.ItemView
-        android:id="@+id/phone"
+        android:id="@+id/center_flag"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         app:left_icon="@drawable/ic_phone"
-        app:left_text="添加研究方向标签"
-        app:right_text="" />
+        app:left_text="兴趣标签"
+        app:right_text="添加或删除标签" />
     <com.MobileCourse.Fragments.ItemView
         android:id="@+id/about"
         android:layout_width="wrap_content"

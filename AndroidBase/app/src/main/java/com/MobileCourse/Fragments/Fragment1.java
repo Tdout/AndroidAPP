@@ -101,7 +101,8 @@ public class Fragment1 extends Fragment {
         imagePath = new ArrayList<>();
         imageTitle = new ArrayList<>();
         imagePath.add("http://e.hiphotos.baidu.com/image/pic/item/a1ec08fa513d2697e542494057fbb2fb4316d81e.jpg");
-        imagePath.add("http://c.hiphotos.baidu.com/image/pic/item/30adcbef76094b36de8a2fe5a1cc7cd98d109d99.jpg");
+        //imagePath.add("http://c.hiphotos.baidu.com/image/pic/item/30adcbef76094b36de8a2fe5a1cc7cd98d109d99.jpg");
+        imagePath.add(MainActivity.global_url+"/static/huqian17/img.jpg");
         imageTitle.add("图片1");
         imageTitle.add("图片2");
     }

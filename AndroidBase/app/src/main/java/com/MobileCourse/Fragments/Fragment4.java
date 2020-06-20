@@ -12,39 +12,49 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.MobileCourse.ChangePswActivity;
 import com.MobileCourse.FalseWechat.ShowMorePage;
+import com.MobileCourse.FlagActivity;
+import com.MobileCourse.LoginActivity;
+import com.MobileCourse.MainActivity;
 import com.MobileCourse.R;
 import com.MobileCourse.TemplateActivity1;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-import com.bumptech.glide.load.resource.bitmap.CircleCrop;
-import com.bumptech.glide.request.RequestOptions;
+//import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+//import com.bumptech.glide.request.RequestOptions;
 
 import butterknife.ButterKnife;
 import jp.wasabeef.glide.transformations.BlurTransformation;
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 public class Fragment4 extends Fragment {
 
     View mView;
+    private ImageView mHBack;
+    private ImageView mHHead;
+    private ImageView mUserLine;
+    private TextView mUserName;
+    private TextView mUserEmail;
 
-//    @BindView(R.id.btn)
-//    Button btn;
-//
-//    private boolean showBtn = true;
-//
+    private ItemView centerUserInfo;
+    private ItemView mSex;
+    private ItemView mSignName;
+    private ItemView centerPass;
+    private ItemView centerFlag;
+    private ItemView mAbout;
+
+
     public Fragment4() {
         // Required empty public constructor
     }
-
-    // 控制是否展示对应的按钮
-//    public Fragment4(boolean showBtn) {
-//        this.showBtn = showBtn;
-//    }
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -52,39 +62,43 @@ public class Fragment4 extends Fragment {
         mView = inflater.inflate(R.layout.fragment_4, container, false);
         initView();
         System.out.println("---------------------3---------------------");
-        //setData();
+        setData();
         System.out.println("---------------------4---------------------");
         return mView;
     }
-    private ImageView mHBack;
-    private ImageView mHHead;
-    private ImageView mUserLine;
-    private TextView mUserName;
-    private TextView mUserVal;
 
-    private ItemView mNickName;
-    private ItemView mSex;
-    private ItemView mSignName;
-    private ItemView mPass;
-    private ItemView mPhone;
-    private ItemView mAbout;
 
     private void setData() {
         //设置背景磨砂效果
-        Glide.with(this).load(R.drawable.head)
-                .apply(new RequestOptions().transform(new BlurTransformation(25, 25)))
-                .apply(new RequestOptions().transform(new CenterCrop()))
+//        Glide.with(this).load(R.drawable.head)
+//                .apply(new RequestOptions().bitmapTransform(new BlurTransformation(25,1)))
+//                .apply(new RequestOptions().centerCrop())
+//                .into(mHBack);
+//        //设置圆形图像
+//        Glide.with(this).load(R.drawable.head)
+//                .apply(new RequestOptions().transform(new CircleCrop()))
+//                .into(mHHead);
+        Glide.with(mHBack.getContext()).load(R.drawable.head)
+                .bitmapTransform(new BlurTransformation(mHBack.getContext(), 25), new CenterCrop(mHBack.getContext()))
                 .into(mHBack);
-        //设置圆形图像
-        Glide.with(this).load(R.drawable.head)
-                .apply(new RequestOptions().transform(new CircleCrop()))
+        Glide.with(mHHead.getContext()).load(R.drawable.head)
+                .bitmapTransform(new CropCircleTransformation(mHHead.getContext()))
                 .into(mHHead);
 
         //设置用户名整个item的点击事件
-        mNickName.setItemClickListener(new ItemView.itemClickListener() {
+        centerFlag.setItemClickListener(new ItemView.itemClickListener() {
             @Override
             public void itemClick(String text) {
+                Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), FlagActivity.class));
+            }
+        });
 
+        centerPass.setItemClickListener(new ItemView.itemClickListener() {
+            @Override
+            public void itemClick(String text) {
+                Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), ChangePswActivity.class));
             }
         });
 
@@ -112,15 +126,15 @@ public class Fragment4 extends Fragment {
         mHBack =mView.findViewById(R.id.h_back);
         mHHead = mView.findViewById(R.id.h_head);
         mUserLine = mView.findViewById(R.id.user_line);
-        mUserName = mView.findViewById(R.id.user_name);
-        mUserVal = mView.findViewById(R.id.user_val);
+        mUserName = mView.findViewById(R.id.center_user_name);
+        mUserEmail = mView.findViewById(R.id.center_user_email);
         //下面item控件
         System.out.println("---------------------2---------------------");
-        mNickName = mView.findViewById(R.id.nickName);
+        centerUserInfo = mView.findViewById(R.id.center_user_info);
         mSex = mView.findViewById(R.id.sex);
         mSignName = mView.findViewById(R.id.signName);
-        mPass = mView.findViewById(R.id.pass);
-        mPhone = mView.findViewById(R.id.phone);
+        centerPass = mView.findViewById(R.id.center_pass);
+        centerFlag = mView.findViewById(R.id.center_flag);
         mAbout = mView.findViewById(R.id.about);
     }
 }
