@@ -242,8 +242,9 @@ public class Fragment2 extends Fragment {
         List<Map<String, Object>> list=new ArrayList<Map<String,Object>>();
         for (int i = 0; i < ListData.size(); i++) {
             Map<String, Object> map=new HashMap<String, Object>();
-            map.put("image", R.drawable.ic_people_nearby); // 图片获取
-            //map.put("image", ListData.get(i).image); // 图片获取
+            String path = MainActivity.global_url + "/static/" + ListData.get(i).ID + "/img.jpg";
+            //map.put("image", R.drawable.ic_people_nearby); // 图片获取
+            map.put("image", path); // 图片获取
             map.put("list_name","Name: " + ListData.get(i).list_name);
             map.put("list_major", "Major: " + ListData.get(i).list_major);
             map.put("list_class", ListData.get(i).list_class);

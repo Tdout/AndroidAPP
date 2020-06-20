@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         fragments.add(new Fragment4());
 
         viewPager.setAdapter(new MyFragmentAdapter(fm, fragments));
+        viewPager.setOffscreenPageLimit(4);
 
         navigationMenu.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
@@ -111,33 +112,31 @@ public class MainActivity extends AppCompatActivity {
         };
 
         // 关键权限必须动态申请
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
-
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
 
         // 初始化websocket
-        WebSocket.initSocket();
-
-
-        CommonInterface.sendOkHttpGetRequest("/hello", new Callback() {
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                Log.e("error", e.toString());
-            }
-
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                String resStr = response.body().string();
-                MainActivity.this.runOnUiThread(() -> Toast.makeText(MainActivity.this, resStr, Toast.LENGTH_LONG).show());
-                Log.e("response", resStr);
-                try {
-                    // 解析json，然后进行自己的内部逻辑处理
-                    JSONObject jsonObject = new JSONObject(resStr);
-                } catch (JSONException e) {
-
-                }
-            }
-        });
+//        WebSocket.initSocket();
+//
+//        CommonInterface.sendOkHttpGetRequest("/hello", new Callback() {
+//            @Override
+//            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+//                Log.e("error", e.toString());
+//            }
+//
+//            @Override
+//            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+//                String resStr = response.body().string();
+//                MainActivity.this.runOnUiThread(() -> Toast.makeText(MainActivity.this, resStr, Toast.LENGTH_LONG).show());
+//                Log.e("response", resStr);
+//                try {
+//                    // 解析json，然后进行自己的内部逻辑处理
+//                    JSONObject jsonObject = new JSONObject(resStr);
+//                } catch (JSONException e) {
+//
+//                }
+//            }
+//        });
 
     }
 

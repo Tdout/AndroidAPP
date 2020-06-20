@@ -16,7 +16,6 @@
 
         <ImageView
             android:id="@+id/userImage"
-            android:src="@drawable/ic_people_nearby"
             android:padding="10dp"
             android:scaleType="fitCenter"
             android:layout_height="100dp"

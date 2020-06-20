@@ -30,6 +30,8 @@ import com.MobileCourse.Fragments.Fragment1;
 import com.MobileCourse.MainActivity;
 import com.MobileCourse.R;
 import com.MobileCourse.utils.CommonInterface;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,6 +57,7 @@ public class ShowMorePage extends Activity implements View.OnClickListener {
     private int followType = 0;
     private String nameText =  " ";
     private String photoUrl;
+    private ImageView image;
     private TextView test;
     private ArrayList<String> Exp;
     private ArrayList<String> Res;
@@ -65,7 +68,10 @@ public class ShowMorePage extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show_more_page);
         String TargetID = getID();
+        photoUrl = MainActivity.global_url + "/static/" + TargetID + "/img.jpg";
+        image=(ImageView)findViewById(R.id.userImage);
         name =(TextView) findViewById(R.id.show_name);
+        //photoUrl = (ImageView) findViewById(R.id.userImage);
         id =(TextView) findViewById(R.id.show_ID);
         id.setText("ID: " + TargetID);
         subscribe = findViewById(R.id.sub_btn);
@@ -75,6 +81,11 @@ public class ShowMorePage extends Activity implements View.OnClickListener {
         }
         ButterKnife.bind(this);
         //获取数据
+        Glide.with(this).load(photoUrl).
+                apply(new RequestOptions().
+                        placeholder(R.drawable.ic_people_nearby).
+                        error(R.drawable.ic_people_nearby))
+                .into(image);
         Thread t = new Thread(){
             @Override
             public void run() {
@@ -145,6 +156,7 @@ public class ShowMorePage extends Activity implements View.OnClickListener {
         }else if(followType == -1){
             subscribe.setText("关 注");
         }else {
+            subscribe.setText("ERROR");
             Toast.makeText(getApplicationContext(),"关注按钮值错误！",Toast.LENGTH_SHORT).show();
         }
         name.setText(nameText);

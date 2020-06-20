@@ -2,6 +2,8 @@ package com.MobileCourse.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -15,7 +17,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -161,6 +162,7 @@ public class Fragment1 extends Fragment {
         };
         t.start();
 
+
         try {
             t.join();
             System.out.println(ListData.get(0).list_name);
@@ -226,6 +228,7 @@ public class Fragment1 extends Fragment {
     // list 数据获取
     // 向数据库请求数据
 
+
     public static String get_list_from_DB(){
         //String params = "{\"user_id\":"+ "\"aaaa\"" + ",\"identity\":" + 2 +  "}";// 参数
         String urlStr = MainActivity.global_url + "/recommend";
@@ -274,24 +277,42 @@ public class Fragment1 extends Fragment {
 
 
     public List<Map<String, Object>> getData(){
-        if(ListData == null) {
-            ListData = new ArrayList<>();
-            // 数据分配
-            for (int i = 0;i<10;i++){
-                Data e = new Data();
-                e.list_name = "Name"+i;
-                e.list_major = "Major";
-                e.list_class = "Class";
-                e.ID = "ID_NUM";
-                e.info = "INFO";
-                ListData.add(e);
-            }
-        }
+//        ListData = new ArrayList<>();
+//        // 数据分配
+//        for (int i = 0;i<10;i++){
+//            Data e = new Data();
+//            e.list_name = "Name"+i;
+//            e.list_major = "Major";
+//            e.list_class = "Class";
+//            e.ID = "ID_NUM";
+//            e.info = "INFO";
+//            ListData.add(e);
+//        }
         List<Map<String, Object>> list=new ArrayList<Map<String,Object>>();
         for (int i = 0; i < ListData.size(); i++) {
             Map<String, Object> map=new HashMap<String, Object>();
-            map.put("image", R.drawable.ic_people_nearby); // 图片获取
-            //map.put("image", ListData.get(i).image); // 图片获取
+            //map.put("image", R.drawable.ic_people_nearby); // 图片获取
+//            final Bitmap[] image = new Bitmap[1];
+//            Thread t0 = new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    try{
+//                        image[0] = getImage(url);
+//                    }catch (Exception e){
+//                        image[0] = getImage("default");
+//                    }
+//                }
+//            });
+//            t0.start();
+//        try {
+//            t0.join();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+            String path = MainActivity.global_url + "/static/" + ListData.get(i).ID + "/img.jpg";
+            //String path = MainActivity.global_url + "/static/default/img.jpg";
+            //String path = "http://e.hiphotos.baidu.com/image/pic/item/a1ec08fa513d2697e542494057fbb2fb4316d81e.jpg";
+            map.put("image", path);
             map.put("list_name","Name: " + ListData.get(i).list_name);
             map.put("list_major", "Major: " + ListData.get(i).list_major);
             map.put("list_class", ListData.get(i).list_class);
@@ -299,12 +320,32 @@ public class Fragment1 extends Fragment {
                 map.put("info", "info: " + ListData.get(i).info.substring(0,20));
             }
             else
-                map.put("info", "Interests: " + ListData.get(i).info);
+                map.put("info", "INFO: " + ListData.get(i).info);
             list.add(map);
         }
         return list;
     }
 
-
+    public Bitmap getImage(String ID){
+        String path = MainActivity.global_url + "/static/" + ID + "/img.jpg";
+        try {
+            URL url = new URL(path);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setConnectTimeout(5000);
+            conn.setRequestMethod("GET");
+            if (conn.getResponseCode() == 200) {
+                InputStream inputStream = conn.getInputStream();
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                return bitmap;
+            }
+            return null;
+        }
+        catch (Exception e) {
+            Log.e("e:", String.valueOf(e));
+            System.out.println(e.toString());
+            return null;
+        }
+    }
 
 }
+
