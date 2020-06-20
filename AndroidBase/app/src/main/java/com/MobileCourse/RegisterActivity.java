@@ -1,5 +1,6 @@
 package com.MobileCourse;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import com.MobileCourse.utils.MD5Utils;
 import android.content.SharedPreferences;
@@ -50,7 +51,6 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //设置页面布局 ,注册界面
         setContentView(R.layout.activity_register);
-        //设置此界面为竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         init();
     }

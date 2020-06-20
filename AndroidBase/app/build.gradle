@@ -30,7 +30,7 @@ dependencies {
     implementation 'com.squareup.okhttp:okhttp:2.5.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     //implementation 'com.github.bumptech.glide:glide:4.6.1'
-    implementation 'jp.wasabeef:glide-transformations:3.0.1'
+    implementation 'jp.wasabeef:glide-transformations:2.0.1'
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.robolectric:robolectric:4.3.1'
 
@@ -47,7 +47,7 @@ dependencies {
 
     //轮播页
     implementation 'com.youth.banner:banner:1.4.9'   //banner依赖
-    implementation "com.github.bumptech.glide:glide:4.6.1" // glide依赖：加载网络图片
+    implementation "com.github.bumptech.glide:glide:3.7.0" // glide依赖：加载网络图片
 
 
 }
