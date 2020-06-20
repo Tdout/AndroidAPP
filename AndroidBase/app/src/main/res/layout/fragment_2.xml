@@ -6,21 +6,83 @@
     android:orientation="vertical"
     tools:context=".Fragments.Fragment2">
 
-    <TextView
-        android:layout_marginTop="100dp"
-        android:background="@drawable/back_corner"
+    <!--输入框-->
+    <EditText
+        android:id="@+id/search_Edit"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
         android:layout_gravity="center_horizontal"
-        android:padding="20dp"
+        android:background="@drawable/edit_background"
+        android:paddingLeft="8dp"
+        android:gravity="center_vertical"
+        android:hint="请输入搜索内容"
+        android:singleLine="true"
+        android:textColor="#000000"
+        android:textColorHint="#a3a3a3"
+        android:textSize="14sp"/>
+    <!--输入框-->
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="自定义边框的圆角" />
+        android:orientation="horizontal"
+        android:layout_marginLeft="35dp">
 
+        <RadioGroup
+            android:id="@+id/RadioGroup2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/search_id"
+                android:layout_width="85dp"
+                android:layout_height="match_parent"
+                android:text="用户ID"
+                android:textSize="15dp"
+                android:textColor="#9966CC"/>
+
+            <RadioButton
+                android:id="@+id/search_kw"
+                android:layout_width="85dp"
+                android:layout_height="match_parent"
+                android:text="关键字"
+                android:textSize="15dp"
+                android:textColor="#9966CC"/>
+
+            <RadioButton
+                android:id="@+id/search_name"
+                android:layout_width="85dp"
+                android:layout_height="match_parent"
+                android:text="姓名"
+                android:textSize="15dp"
+                android:textColor="#9966CC"/>
+        </RadioGroup>
+    </LinearLayout>
     <Button
-        android:id="@+id/btn"
-        android:layout_marginTop="20dp"
-        android:text="显示普通的Fragment管理样例"
+        android:id="@+id/search_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
         android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:background="#CC99CC"
+        android:text="搜 索"
+        android:textColor="@android:color/holo_purple"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+<!--    搜索结果-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <ListView
+            android:id="@+id/list_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"/>
+    </LinearLayout>
 
 </LinearLayout>

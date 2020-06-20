@@ -17,8 +17,9 @@ import com.MobileCourse.TemplateActivity1;
 
 public class Fragment3 extends Fragment {
 
-    @BindView(R.id.btn)
+    @BindView(R.id.search_btn)
     Button btn;
+    View mView;
 
     private boolean showBtn = true;
 
@@ -38,8 +39,8 @@ public class Fragment3 extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View inflate = inflater.inflate(R.layout.fragment_2, container, false);
+        mView = inflater.inflate(R.layout.fragment_2, container, false);
 
-        return inflate;
+        return mView;
     }
 }

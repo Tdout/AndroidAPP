@@ -68,10 +68,10 @@ public class Fragment1 extends Fragment {
 
     }
     private ListView mListView;
-    private ArrayList<String> ListTitle;
+    //private ArrayList<String> ListTitle;
     private ArrayList<Data> ListData;
-    private List<Map<String, Object>> list;
-    private Button mButton;
+    //private List<Map<String, Object>> list;
+    //private Button mButton;
 
     public Fragment1() {
         // Required empty public constructor
@@ -130,6 +130,7 @@ public class Fragment1 extends Fragment {
                         JSONArray user_list=new JSONArray(jsonData);
                         // 数据分配
                         ListData = new ArrayList<>();
+                        ListData.clear();
                         int num = 10;
                         if(user_list.length()<10){
                             num = user_list.length();
@@ -273,12 +274,6 @@ public class Fragment1 extends Fragment {
 
 
     public List<Map<String, Object>> getData(){
-        ListTitle = new ArrayList<>();
-        for (int i = 0;i<10;i++){
-            ListTitle.add("Name");
-            ListTitle.add("Major");
-            ListTitle.add("Class"); // 学生显示年纪， 导师显示类型（研究生 博士等）
-        }
         if(ListData == null) {
             ListData = new ArrayList<>();
             // 数据分配

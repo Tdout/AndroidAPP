@@ -1,15 +1,18 @@
 package com.MobileCourse.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.MobileCourse.FalseWechat.ShowMorePage;
 import com.MobileCourse.R;
 import com.MobileCourse.TemplateActivity1;
 import com.bumptech.glide.Glide;
@@ -17,9 +20,12 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
 
+import butterknife.ButterKnife;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
 public class Fragment4 extends Fragment {
+
+    View mView;
 
 //    @BindView(R.id.btn)
 //    Button btn;
@@ -43,10 +49,12 @@ public class Fragment4 extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View inflate = inflater.inflate(R.layout.fragment_4, container, false);
+        mView = inflater.inflate(R.layout.fragment_4, container, false);
         initView();
-        setData();
-        return inflate;
+        System.out.println("---------------------3---------------------");
+        //setData();
+        System.out.println("---------------------4---------------------");
+        return mView;
     }
     private ImageView mHBack;
     private ImageView mHHead;
@@ -79,6 +87,7 @@ public class Fragment4 extends Fragment {
 
             }
         });
+
         //修改用户名item的左侧图标
       /* mNickName.setLeftIcon(R.drawable.ic_phone);
         //
@@ -99,17 +108,19 @@ public class Fragment4 extends Fragment {
     }
     private void initView() {
         //顶部头像控件
-        mHBack =mHBack.findViewById(R.id.h_back);
-        mHHead = mHHead.findViewById(R.id.h_head);
-        mUserLine = mUserLine.findViewById(R.id.user_line);
-        mUserName = mUserName.findViewById(R.id.user_name);
-        mUserVal = mUserVal.findViewById(R.id.user_val);
+        System.out.println("---------------------1---------------------");
+        mHBack =mView.findViewById(R.id.h_back);
+        mHHead = mView.findViewById(R.id.h_head);
+        mUserLine = mView.findViewById(R.id.user_line);
+        mUserName = mView.findViewById(R.id.user_name);
+        mUserVal = mView.findViewById(R.id.user_val);
         //下面item控件
-        mNickName = mNickName.findViewById(R.id.nickName);
-        mSex = mSex.findViewById(R.id.sex);
-        mSignName = mSignName.findViewById(R.id.signName);
-        mPass = mPass.findViewById(R.id.pass);
-        mPhone = mPhone.findViewById(R.id.phone);
-        mAbout = mAbout.findViewById(R.id.about);
+        System.out.println("---------------------2---------------------");
+        mNickName = mView.findViewById(R.id.nickName);
+        mSex = mView.findViewById(R.id.sex);
+        mSignName = mView.findViewById(R.id.signName);
+        mPass = mView.findViewById(R.id.pass);
+        mPhone = mView.findViewById(R.id.phone);
+        mAbout = mView.findViewById(R.id.about);
     }
 }

@@ -111,7 +111,6 @@ public class LoginActivity extends AppCompatActivity  {
 //                }else{
 //                    Toast.makeText(LoginActivity.this, "此用户名不存在", Toast.LENGTH_SHORT).show();
 //                }
-<<<<<<< HEAD
 //                Thread t = new Thread(new Runnable() {
 //                    @Override
 //                    public void run() {
@@ -161,27 +160,26 @@ public class LoginActivity extends AppCompatActivity  {
 //                }
                 //一致登录成功
                 //if (Integer.valueOf(result) == 1) {
-                if (true) {
-                    Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-                    //保存登录状态，在界面保存登录的用户名 定义个方法 saveLoginStatus boolean 状态 , userName 用户名;
-                    //saveLoginStatus(true, userName);
-                    //登录成功后关闭此页面进入主页
-                    //Intent data = new Intent();
-                    //datad.putExtra( ); name , value ;
-                    //data.putExtra("isLogin", true);
-                    //RESULT_OK为Activity系统常量，状态码为-1
-                    // 表示此页面下的内容操作成功将data返回到上一页面，如果是用back返回过去的则不存在用setResult传递data值
-                    //setResult(RESULT_OK, data);
-                    //销毁登录界面
-                    LoginActivity.this.finish();
-                    //跳转到主界面，登录成功的状态传递到 MainActivity 中
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                    return;
-                }
-                else{
-                    Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
-                }
-=======
+//                if (true) {
+//                    Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+//                    //保存登录状态，在界面保存登录的用户名 定义个方法 saveLoginStatus boolean 状态 , userName 用户名;
+//                    //saveLoginStatus(true, userName);
+//                    //登录成功后关闭此页面进入主页
+//                    //Intent data = new Intent();
+//                    //datad.putExtra( ); name , value ;
+//                    //data.putExtra("isLogin", true);
+//                    //RESULT_OK为Activity系统常量，状态码为-1
+//                    // 表示此页面下的内容操作成功将data返回到上一页面，如果是用back返回过去的则不存在用setResult传递data值
+//                    //setResult(RESULT_OK, data);
+//                    //销毁登录界面
+//                    LoginActivity.this.finish();
+//                    //跳转到主界面，登录成功的状态传递到 MainActivity 中
+//                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//                    return;
+//                }
+//                else{
+//                    Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+//                }
                 Thread t = new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -232,32 +230,30 @@ public class LoginActivity extends AppCompatActivity  {
                     e.printStackTrace();
                 }
                 //一致登录成功
+                if (Integer.valueOf(result) == 1) {
+                    Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                    //保存登录状态，在界面保存登录的用户名 定义个方法 saveLoginStatus boolean 状态 , userName 用户名;
+                    //saveLoginStatus(true, userName);
+                    //登录成功后关闭此页面进入主页
+                    //Intent data = new Intent();
+                    //datad.putExtra( ); name , value ;
+                    //data.putExtra("isLogin", true);
+                    //RESULT_OK为Activity系统常量，状态码为-1
+                    // 表示此页面下的内容操作成功将data返回到上一页面，如果是用back返回过去的则不存在用setResult传递data值
+                    //setResult(RESULT_OK, data);
+                    MainActivity.global_login_id = userName;
+                    MainActivity.global_login_type = LoginType;
+                    //销毁登录界面
+                    LoginActivity.this.finish();
+                    //跳转到主界面，登录成功的状态传递到 MainActivity 中
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    return;
+                }
+                else {
+                    Toast.makeText(LoginActivity.this, "账号或密码错误", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                    if (Integer.valueOf(result) == 1) {
-                        Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-                        //保存登录状态，在界面保存登录的用户名 定义个方法 saveLoginStatus boolean 状态 , userName 用户名;
-                        //saveLoginStatus(true, userName);
-                        //登录成功后关闭此页面进入主页
-                        //Intent data = new Intent();
-                        //datad.putExtra( ); name , value ;
-                        //data.putExtra("isLogin", true);
-                        //RESULT_OK为Activity系统常量，状态码为-1
-                        // 表示此页面下的内容操作成功将data返回到上一页面，如果是用back返回过去的则不存在用setResult传递data值
-                        //setResult(RESULT_OK, data);
-                        MainActivity.global_login_id = userName;
-                        MainActivity.global_login_type = LoginType;
-                        //销毁登录界面
-                        LoginActivity.this.finish();
-                        //跳转到主界面，登录成功的状态传递到 MainActivity 中
-                        startActivity(new Intent(LoginActivity.this, FlagActivity.class));
-                        return;
-                    }
-                    else {
-                        Toast.makeText(LoginActivity.this, "账号或密码错误", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
->>>>>>> 3e5421e029e1b310d83c22bda20f4bb5e758f908
             }
         });
     }

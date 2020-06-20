@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -50,6 +51,8 @@ public class ShowMorePage extends Activity implements View.OnClickListener {
     //@BindView(R.id.img_social_circle)ImageView social_circle;
     private TextView name;
     private TextView id;
+    private Button subscribe;
+    private int followType = 0;
     private String nameText =  " ";
     private String photoUrl;
     private TextView test;
@@ -65,16 +68,12 @@ public class ShowMorePage extends Activity implements View.OnClickListener {
         name =(TextView) findViewById(R.id.show_name);
         id =(TextView) findViewById(R.id.show_ID);
         id.setText("ID: " + TargetID);
-        // 网络请求
-
+        subscribe = findViewById(R.id.sub_btn);
+        if(MainActivity.global_login_type == 1)//1是老师
+        {
+            subscribe.setVisibility(View.INVISIBLE);
+        }
         ButterKnife.bind(this);
-
-//        CommonInterface.addViewsListener(this, new int[]{
-//                R.id.research_dir,
-//                R.id.skill,
-//                R.id.exp
-//            }, this);
-
         //获取数据
         Thread t = new Thread(){
             @Override
@@ -86,9 +85,7 @@ public class ShowMorePage extends Activity implements View.OnClickListener {
                 System.out.println("jsonData");
                 if(jsonData==null)
                 {
-                    Looper.prepare();
                     Toast.makeText(getApplicationContext(),"网络连接错误！",Toast.LENGTH_SHORT).show();
-                    Looper.loop();
                 }
                 else
                 {
@@ -102,18 +99,10 @@ public class ShowMorePage extends Activity implements View.OnClickListener {
                         Exp = new ArrayList<>();
                         Skill = new ArrayList<>();
                         Res = new ArrayList<>();
+                        // follow
+                        followType = user_list.getInt("isfollow");
                         // EXP
                         int num = 0;
-//                        num = Exp_list.length();
-//                        if (num == 0){
-//                            Exp.add("none");
-//                        }
-//                        else{
-//                            for (int i = 0;i<num;i++){
-//                                JSONObject object=Exp_list.getJSONObject(i);
-//                                Exp.add(object.getString("info"));
-//                            }
-//                        }
                         nameText = user_list.getString("name");
                         String experience = user_list.getString("info");
                         Exp.add(experience);
@@ -128,28 +117,22 @@ public class ShowMorePage extends Activity implements View.OnClickListener {
                                 Res.add(kw);
                             }
                         }
-                        // Skill
                         String skill = user_list.getString("skill");
                         Skill.add(skill);
-                        //Skill.add("test-------------------------------------------------------------------------------------");
                     } catch (JSONException e) {
                         e.printStackTrace();
                         System.out.println(e.toString());
-                        //Looper.prepare();
-                        //Toast.makeText(getApplicationContext(),"文件解析错误！",Toast.LENGTH_SHORT).show();
                         Exp = new ArrayList<>();
                         Skill = new ArrayList<>();
                         Res = new ArrayList<>();
                         Exp.add("none");
                         Res.add("none");
                         Skill.add("none");
-                        //Looper.loop();
                     }
                 }
             }
         };
         t.start();
-
         try {
             t.join();
         } catch (InterruptedException e) {
@@ -157,14 +140,66 @@ public class ShowMorePage extends Activity implements View.OnClickListener {
         }
 
         // 设置内容
+        if(followType == 1){
+            subscribe.setText("已关注");
+        }else if(followType == -1){
+            subscribe.setText("关 注");
+        }else {
+            Toast.makeText(getApplicationContext(),"关注按钮值错误！",Toast.LENGTH_SHORT).show();
+        }
         name.setText(nameText);
         initView();
         addResListview();
         addSkillListview();
         addExpListview();
-
-
-
+        subscribe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Thread t2 = new Thread(){
+                    @Override
+                    public void run() {
+                        System.out.println("URL-SUB");
+                        String jsonData = sub_send_to_DB(TargetID);
+                        System.out.println("jsonData");
+                        System.out.println(jsonData);
+                        System.out.println("jsonData");
+                        if(jsonData==null)
+                        {
+                            Toast.makeText(getApplicationContext(),"网络连接错误！",Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            try {
+                                JSONObject result=new JSONObject(jsonData);
+                                // 数据分配
+                                followType = result.getInt("isfollow");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                System.out.println(e.toString());
+                            }
+                        }
+                    }
+                };
+                t2.start();
+                try {
+                    t2.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if(followType == 1){
+                    Toast.makeText(getApplicationContext(),"已关注",Toast.LENGTH_SHORT).show();
+                    subscribe.setText("已关注");
+                }
+                else if(followType == -1){
+                    Toast.makeText(getApplicationContext(),"取消关注",Toast.LENGTH_SHORT).show();
+                    subscribe.setText("关 注");
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"按钮属性值错误",Toast.LENGTH_SHORT).show();
+                    subscribe.setText("ERROR");
+                }
+            }
+        });
     }
 
     ScrollView scrollView;
@@ -181,7 +216,7 @@ public class ShowMorePage extends Activity implements View.OnClickListener {
     }
     private void addResListview( ){
         TextView textView = new TextView(this);
-        textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         textView.setText("研究方向");
         textView.setGravity(Gravity.LEFT);
         textView.setTextSize(18);
@@ -202,7 +237,7 @@ public class ShowMorePage extends Activity implements View.OnClickListener {
         ListView listView = new ListView(this);
         //int height = arraylist.size() * (int) getResources().getDimension(R.dimen.listview_item_height);
         int height = arraylist.size() * 100;
-        listView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, height));
+        listView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height));
         listView.setDividerHeight(1);
 
         listView.setAdapter(listViewAdapter);
@@ -211,7 +246,7 @@ public class ShowMorePage extends Activity implements View.OnClickListener {
 
     private void addSkillListview( ){
         TextView textView = new TextView(this);
-        textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         textView.setText("掌握技能");
         textView.setGravity(Gravity.LEFT);
         textView.setTextSize(18);
@@ -232,7 +267,7 @@ public class ShowMorePage extends Activity implements View.OnClickListener {
         ListView listView = new ListView(this);
         //int height = arraylist.size() * (int) getResources().getDimension(R.dimen.listview_item_height);
         int height = arraylist.size() * 100;
-        listView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        listView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         listView.setDividerHeight(1);
 
         listView.setAdapter(listViewAdapter);
@@ -241,7 +276,7 @@ public class ShowMorePage extends Activity implements View.OnClickListener {
 
     private void addExpListview( ){
         TextView textView = new TextView(this);
-        textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         textView.setText("研究经历");
         textView.setGravity(Gravity.LEFT);
         textView.setTextSize(18);
@@ -262,7 +297,7 @@ public class ShowMorePage extends Activity implements View.OnClickListener {
         ListView listView = new ListView(this);
         //int height = arraylist.size() * (int) getResources().getDimension(R.dimen.listview_item_height);
         //int height = arraylist.size() * 100;
-        listView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        listView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         listView.setDividerHeight(1);
 
         listView.setAdapter(listViewAdapter);
@@ -291,7 +326,8 @@ public class ShowMorePage extends Activity implements View.OnClickListener {
         try {
             JSONObject userJSON = new JSONObject();
             userJSON.put("identity",MainActivity.global_login_type);
-            userJSON.put("user_id",target_id);
+            userJSON.put("user_id",MainActivity.global_login_id);
+            userJSON.put("aim_id", target_id);
             String params = String.valueOf(userJSON);
             URL url=new URL(urlStr);
             HttpURLConnection connect=(HttpURLConnection)url.openConnection();
@@ -326,38 +362,46 @@ public class ShowMorePage extends Activity implements View.OnClickListener {
         }
     }
 
-    public List<Map<String, Object>> getDataExp(){
-        Exp = new ArrayList<>();
-        for(int i=0; i<5;i++)
-        {
-            Exp = new ArrayList<>();
-            Exp.add("EXP: " + i);
+    public static String sub_send_to_DB(String target_id){
+        String urlStr = MainActivity.global_url + "/follow"; // list
+        System.out.println("URL-TEST-SUB");
+        try {
+            JSONObject userJSON = new JSONObject();
+            userJSON.put("user_id",MainActivity.global_login_id);
+            userJSON.put("teacher_id",target_id);
+            String params = String.valueOf(userJSON);
+            URL url=new URL(urlStr);
+            HttpURLConnection connect=(HttpURLConnection)url.openConnection();
+            connect.setDoInput(true);
+            connect.setDoOutput(true);
+            connect.setRequestMethod("GET");
+            connect.setUseCaches(false);
+            connect.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+            OutputStream outputStream = connect.getOutputStream();
+            outputStream.write(params.getBytes());
+
+            int response = connect.getResponseCode();
+            if (response== HttpURLConnection.HTTP_OK)
+            {
+                System.out.println(response);
+                InputStream input=connect.getInputStream();
+                BufferedReader in = new BufferedReader(new InputStreamReader(input));
+                String line = null;
+                StringBuffer sb = new StringBuffer();
+                while ((line = in.readLine()) != null) {
+                    sb.append(line);
+                }
+                return sb.toString();
+            }
+            else {
+                System.out.println(response);
+                return "not exsits";
+            }
+        } catch (Exception e) {
+            Log.e("e:", String.valueOf(e));
+            return e.toString();
         }
-        List<Map<String, Object>> list=new ArrayList<Map<String,Object>>();
-        for (int i = 0; i < Exp.size(); i++) {
-            Map<String, Object> map=new HashMap<String, Object>();
-            map.put("info", " " + Exp.get(i));
-            list.add(map);
-        }
-        return list;
     }
-    public List<Map<String, Object>> getDataRes(){
-        List<Map<String, Object>> list=new ArrayList<Map<String,Object>>();
-        for (int i = 0; i < Res.size(); i++) {
-            Map<String, Object> map=new HashMap<String, Object>();
-            map.put("info", " " + Res.get(i));
-            list.add(map);
-        }
-        return list;
-    }
-    public List<Map<String, Object>> getDataSkill(){
-        List<Map<String, Object>> list=new ArrayList<Map<String,Object>>();
-        for (int i = 0; i < Skill.size(); i++) {
-            Map<String, Object> map=new HashMap<String, Object>();
-            map.put("info", " " + Skill.get(i));
-            list.add(map);
-        }
-        return list;
-    }
+
     
 }

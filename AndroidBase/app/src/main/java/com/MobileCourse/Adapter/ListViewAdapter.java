@@ -27,7 +27,6 @@ public class ListViewAdapter extends BaseAdapter {
     }
     /**
      * 组件集合，对应list.xml中的控件
-     * @author Administrator
      */
     public final class myList{
         public ImageView image;
