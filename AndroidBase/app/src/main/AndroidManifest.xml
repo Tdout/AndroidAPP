@@ -28,10 +28,20 @@
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".MainActivity"/>
         <activity android:name=".ChangePswActivity"/>
+        <activity android:name=".UserInfoActivity"/>
         <activity android:name=".FalseWechat.FalseWeChat" />
         <activity android:name=".FalseWechat.FalseWeChat2" />
         <activity android:name=".FalseWechat.ShowMorePage"/>
         <activity android:name=".TemplateActivity1" />
         <activity android:name=".Application" />
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.MobileCourse.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
     </application>
 </manifest>
