@@ -22,12 +22,12 @@ import com.MobileCourse.TemplateActivity1;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-//import com.bumptech.glide.load.resource.bitmap.CircleCrop;
-//import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 
 import butterknife.ButterKnife;
 import jp.wasabeef.glide.transformations.BlurTransformation;
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
+//import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 public class Fragment4 extends Fragment {
 
@@ -70,19 +70,25 @@ public class Fragment4 extends Fragment {
 
     private void setData() {
         //设置背景磨砂效果
-//        Glide.with(this).load(R.drawable.head)
-//                .apply(new RequestOptions().bitmapTransform(new BlurTransformation(25,1)))
-//                .apply(new RequestOptions().centerCrop())
-//                .into(mHBack);
-//        //设置圆形图像
+        Glide.with(this).load(R.drawable.back_gradient)
+                .apply(new RequestOptions().bitmapTransform(new BlurTransformation(25,1)))
+                .apply(new RequestOptions().centerCrop())
+                .into(mHBack);
+        //设置圆形图像
 //        Glide.with(this).load(R.drawable.head)
 //                .apply(new RequestOptions().transform(new CircleCrop()))
 //                .into(mHHead);
-        Glide.with(mHBack.getContext()).load(R.drawable.head)
-                .bitmapTransform(new BlurTransformation(mHBack.getContext(), 25), new CenterCrop(mHBack.getContext()))
-                .into(mHBack);
-        Glide.with(mHHead.getContext()).load(R.drawable.head)
-                .bitmapTransform(new CropCircleTransformation(mHHead.getContext()))
+//        Glide.with(mHBack.getContext()).load(R.drawable.head)
+//                .bitmapTransform(new BlurTransformation(mHBack.getContext(), 25), new CenterCrop(mHBack.getContext()))
+//                .into(mHBack);
+//        Glide.with(mHHead.getContext()).load(R.drawable.head)
+//                .bitmapTransform(new CropCircleTransformation(mHHead.getContext()))
+//                .into(mHHead);
+        Glide.with(this).load(MainActivity.global_url+"/static/"+MainActivity.global_login_id+"/img.jpg").
+                apply(new RequestOptions().
+                        placeholder(R.drawable.ic_people_nearby).
+                        error(R.drawable.ic_people_nearby))
+                .apply(new RequestOptions().transform(new CircleCrop()))
                 .into(mHHead);
 
         //设置用户名整个item的点击事件
