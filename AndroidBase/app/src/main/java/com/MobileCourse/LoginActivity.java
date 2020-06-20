@@ -111,7 +111,7 @@ public class LoginActivity extends AppCompatActivity  {
 //                }else{
 //                    Toast.makeText(LoginActivity.this, "此用户名不存在", Toast.LENGTH_SHORT).show();
 //                }
-<<<<<<< HEAD
+//<<<<<<< HEAD
 //                Thread t = new Thread(new Runnable() {
 //                    @Override
 //                    public void run() {
@@ -181,7 +181,7 @@ public class LoginActivity extends AppCompatActivity  {
                 else{
                     Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
                 }
-=======
+//=======
                 Thread t = new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -257,7 +257,7 @@ public class LoginActivity extends AppCompatActivity  {
                         return;
                     }
 
->>>>>>> 3e5421e029e1b310d83c22bda20f4bb5e758f908
+//>>>>>>> 3e5421e029e1b310d83c22bda20f4bb5e758f908
             }
         });
     }
