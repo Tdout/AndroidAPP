@@ -32,29 +32,26 @@
 
             <ImageView
                 android:id="@+id/user_line"
-                android:layout_width="1dp"
+                android:layout_width="2dp"
                 android:layout_height="25dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="15dp"
-                android:background="@android:color/white" />
+                android:background="@android:color/holo_purple" />
 
             <TextView
                 android:id="@+id/center_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@id/user_line"
-
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:textSize="17sp" />
-
             <TextView
                 android:id="@+id/center_user_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@id/user_line"
-
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:textSize="17sp" />
         </RelativeLayout>
 
@@ -70,20 +67,20 @@
         />
 
     <com.MobileCourse.Fragments.ItemView
-        android:id="@+id/sex"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        app:left_icon="@drawable/ic_sex"
-        app:left_text="发布临时招募"
-        app:right_text="" />
-
-    <com.MobileCourse.Fragments.ItemView
-        android:id="@+id/signName"
+        android:id="@+id/recruit"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         app:left_icon="@drawable/ic_sign_name"
-        app:left_text="查看关注列表"
-        app:right_text="" />
+        app:left_text="发布临时招募"
+        app:right_text="待完成" />
+
+<!--    <com.MobileCourse.Fragments.ItemView-->
+<!--        android:id="@+id/signName"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="50dp"-->
+<!--        app:left_icon="@drawable/ic_sign_name"-->
+<!--        app:left_text="查看关注列表"-->
+<!--        app:right_text="" />-->
 <!--    <com.MobileCourse.Fragments.ItemView-->
 <!--        android:id="@+id/uShcool"-->
 <!--        android:layout_width="wrap_content"-->
@@ -127,7 +124,7 @@
         android:layout_height="50dp"
         app:left_icon="@drawable/ic_about"
         app:left_text="关于我们"
-        app:right_text="" />
+        app:right_text="待完成" />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

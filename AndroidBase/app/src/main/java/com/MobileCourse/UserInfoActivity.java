@@ -7,6 +7,7 @@ import android.content.Intent;
 import com.MobileCourse.Components.PhotoPopupWindow;
 import com.MobileCourse.utils.MD5Utils;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -114,11 +115,13 @@ public class UserInfoActivity extends  AppCompatActivity{
         info_head = findViewById(R.id.info_head);
         info_change_head = findViewById(R.id.info_change_head);
 
-        Glide.with(this).load(MainActivity.global_url+"/static/huqian17/img.jpg").
+        Glide.with(this).load(MainActivity.global_url+"/static/"+MainActivity.global_login_id+"/img.jpg").
                 apply(new RequestOptions().
-                        placeholder(R.drawable.ic_people_nearby).
-                        error(R.drawable.ic_people_nearby))
+                        placeholder(R.drawable.login).
+                        error(R.drawable.login))
                 .apply(new RequestOptions().transform(new CircleCrop()))
+                .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE))
+                .apply(new RequestOptions().skipMemoryCache(true))
                 .into(info_head);
         Thread a = new Thread(new Runnable() {
             @Override
@@ -333,7 +336,7 @@ public class UserInfoActivity extends  AppCompatActivity{
                     //销毁登录界面
                     UserInfoActivity.this.finish();
                     //跳转到主界面，登录成功的状态传递到 MainActivity 中
-                    startActivity(new Intent(UserInfoActivity.this, LoginActivity.class));
+                    startActivity(new Intent(UserInfoActivity.this, MainActivity.class));
                     return;
                 }
             }

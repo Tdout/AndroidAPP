@@ -2,10 +2,12 @@ package com.MobileCourse.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,9 +24,18 @@ import com.MobileCourse.TemplateActivity1;
 import com.MobileCourse.UserInfoActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
+
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import butterknife.ButterKnife;
 import jp.wasabeef.glide.transformations.BlurTransformation;
@@ -38,13 +49,14 @@ public class Fragment4 extends Fragment {
     private ImageView mUserLine;
     private TextView mUserName;
     private TextView mUserEmail;
+    private Button btn_logout;
+    private String result1,name,email;
 
     private ItemView centerUserInfo;
-    private ItemView mSex;
-    private ItemView mSignName;
+    private ItemView centerRecruit;
+    private ItemView centerAbout;
     private ItemView centerPass;
     private ItemView centerFlag;
-    private ItemView mAbout;
 
 
     public Fragment4() {
@@ -55,6 +67,7 @@ public class Fragment4 extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
     }
 
@@ -85,11 +98,13 @@ public class Fragment4 extends Fragment {
 //        Glide.with(mHHead.getContext()).load(R.drawable.head)
 //                .bitmapTransform(new CropCircleTransformation(mHHead.getContext()))
 //                .into(mHHead);
-        Glide.with(this).load(MainActivity.global_url+"/static/default/img.jpg").
+        Glide.with(this).load(MainActivity.global_url+"/static/"+MainActivity.global_login_id+"/img.jpg").
                 apply(new RequestOptions().
-                        placeholder(R.drawable.ic_people_nearby).
-                        error(R.drawable.ic_people_nearby))
+                        placeholder(R.drawable.login).
+                        error(R.drawable.login))
                 .apply(new RequestOptions().transform(new CircleCrop()))
+                .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE))
+                .apply(new RequestOptions().skipMemoryCache(true))
                 .into(mHHead);
         centerUserInfo.setItemClickListener(new ItemView.itemClickListener() {
             @Override
@@ -113,6 +128,24 @@ public class Fragment4 extends Fragment {
             public void itemClick(String text) {
                 Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getActivity(), ChangePswActivity.class));
+            }
+        });
+        centerRecruit.setItemClickListener(new ItemView.itemClickListener() {
+            @Override
+            public void itemClick(String text) {
+                Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
+            }
+        });
+        centerAbout.setItemClickListener(new ItemView.itemClickListener() {
+            @Override
+            public void itemClick(String text) {
+                Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
+            }
+        });
+        btn_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), LoginActivity.class));
             }
         });
 
@@ -145,10 +178,67 @@ public class Fragment4 extends Fragment {
         //下面item控件
         System.out.println("---------------------2---------------------");
         centerUserInfo = mView.findViewById(R.id.center_user_info);
-        mSex = mView.findViewById(R.id.sex);
-        mSignName = mView.findViewById(R.id.signName);
+        centerRecruit = mView.findViewById(R.id.recruit);
         centerPass = mView.findViewById(R.id.center_pass);
         centerFlag = mView.findViewById(R.id.center_flag);
-        mAbout = mView.findViewById(R.id.about);
+        centerAbout = mView.findViewById(R.id.about);
+        btn_logout = mView.findViewById(R.id.logout);
+
+        Thread a = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    BufferedReader reader = null;
+                    JSONObject userJSON = new JSONObject();
+                    userJSON.put("user_id", MainActivity.global_login_id);
+                    userJSON.put("identity", MainActivity.global_login_type);
+
+                    String content = String.valueOf(userJSON);
+                    HttpURLConnection connection = (HttpURLConnection) new URL(MainActivity.global_url+"/info").openConnection();
+                    connection.setConnectTimeout(5000);
+                    connection.setRequestMethod("POST");
+                    connection.setDoOutput(true);
+                    connection.setDoInput(true);
+                    connection.setRequestProperty("Connection", "Keep-Alive");
+                    connection.setRequestProperty("Content-Type", "application/json");
+                    connection.setRequestProperty("Charset", "UTF-8");
+                    connection.setRequestProperty("accept", "application/json");
+                    if (content != null && !TextUtils.isEmpty(content)) {
+                        byte[] writebytes = content.getBytes();
+                        connection.setRequestProperty("Content-Length", String.valueOf(writebytes.length));
+                        OutputStream os = connection.getOutputStream();
+                        os.write(content.getBytes());
+                        os.flush();
+                        os.close();
+                    }
+                    if (connection.getResponseCode() == 200) {
+                        reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                        result1 = reader.readLine();
+                        System.out.println(result1);
+                    }
+                } catch (Exception e) {
+                    System.out.println("failed");
+                }
+            }
+        });
+        a.start();
+        try {
+            a.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        try{
+            JSONObject json = new JSONObject(result1);
+            name = json.getString("name");
+            email = json.getString("email");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if(name!=null) {
+            mUserName.setText(name);
+        }
+        if(email!=null) {
+            mUserEmail.setText(email);
+        }
     }
 }
