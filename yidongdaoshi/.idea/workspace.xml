@@ -8,10 +8,24 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="ProjectId" id="1byaiedqM7onEEOEZw7eW8RQpuO" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/UserModel/static" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ticket" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -30,7 +44,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.KNN">
+  <component name="RunManager" selected="Django server.yidongdaoshi">
     <configuration name="KNN" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="yidongdaoshi" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -98,7 +112,24 @@
       <workItem from="1590591626230" duration="1574000" />
       <workItem from="1590646019228" duration="4909000" />
       <workItem from="1590652960521" duration="1968000" />
-      <workItem from="1590732029706" duration="3068000" />
+      <workItem from="1590732029706" duration="16341000" />
+      <workItem from="1590755542690" duration="280000" />
+      <workItem from="1591158535989" duration="2763000" />
+      <workItem from="1592019685134" duration="6000" />
+      <workItem from="1592229761845" duration="2631000" />
+      <workItem from="1592308942749" duration="3695000" />
+      <workItem from="1592363682328" duration="8741000" />
+      <workItem from="1592377284159" duration="2623000" />
+      <workItem from="1592398079717" duration="1105000" />
+      <workItem from="1592444274362" duration="2598000" />
+      <workItem from="1592465483180" duration="12750000" />
+      <workItem from="1592497085961" duration="856000" />
+      <workItem from="1592540947653" duration="8474000" />
+      <workItem from="1592554751760" duration="8267000" />
+      <workItem from="1592580125903" duration="7074000" />
+      <workItem from="1592633454129" duration="33032000" />
+      <workItem from="1592710598963" duration="5506000" />
+      <workItem from="1592731267901" duration="4852000" />
     </task>
     <servers />
   </component>

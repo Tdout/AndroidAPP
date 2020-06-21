@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加关键词</title>
+</head>
+<body>
+<form action="/setKeyword" method="post" style="text-align: center">
+    {% csrf_token %}
+    <input type="text" name="user_id" placeholder="用户名">    <br>
+    <input type="text" name="identify" placeholder="身份">    <br>
+    <input type="text" name="keyword" placeholder="关键词">    <br>
+    <input type="submit" value="添加">
+</form>
+</body>
+</html>
