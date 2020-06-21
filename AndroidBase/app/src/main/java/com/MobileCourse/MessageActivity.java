@@ -2,9 +2,12 @@ package com.MobileCourse;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -12,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.MobileCourse.Adapter.MsgAdapter;
 import com.MobileCourse.Fragments.Fragment1;
@@ -35,8 +39,54 @@ public class MessageActivity extends AppCompatActivity {
     private ListView msgListView;
     private EditText inputText;
     private Button send;
+    private String TargetID;
     private String MsgStatic = "none";
     private MsgAdapter adapter;
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message hmsg){
+            super.handleMessage(hmsg);
+            switch (hmsg.what){
+                case 1:
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            String jsonData = get_msg_from_DB(TargetID);
+                            try {
+                                //JSONObject result_json=new JSONObject(jsonData);
+                                JSONArray user_list=new JSONArray(jsonData);
+                                // 数据分配
+                                msgList.clear();
+                                for (int i = 0;i<user_list.length();i++){
+                                    JSONObject object=user_list.getJSONObject(i);
+                                    System.out.println(object);
+                                    String content = object.getString("content");
+                                    if(object.getString("sender").equals(MainActivity.global_login_id)){
+                                        // 发送者为本人
+                                        Msg msg = new Msg(content, Msg.TYPE_SEND);
+                                        msgList.add(msg);
+                                    }
+                                    else if(object.getString("sender").equals(TargetID)){
+                                        Msg msg = new Msg(content, Msg.TYPE_RECEIVED);
+                                        msgList.add(msg);
+                                    }
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                System.out.println(e.toString());
+                            }
+                        }
+                    }).start();
+                    //adapter = new MsgAdapter(MessageActivity.this, R.layout.msg_item, msgList);
+                    adapter.notifyDataSetChanged();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+    Boolean up = false;
+    int count = 0;
     private List<Msg> msgList = new ArrayList<Msg>();
 
     @Override
@@ -47,19 +97,24 @@ public class MessageActivity extends AppCompatActivity {
         actionBar.hide();
 
         setContentView(R.layout.msg_layout);
-        String TargetID = getID();
+        TargetID = getID();
+
 
         initMsgs(TargetID);
+        new TimeThread().start();
+        adapter = new MsgAdapter(this, R.layout.msg_item, msgList);
+        msgListView = (ListView)findViewById(R.id.msg_list_view);
+        msgListView.setAdapter(adapter);
         System.out.println("MSG测试");
         for(int i=0;i< msgList.size();i++){
             System.out.println(msgList.get(i).getContent());
         }
         //System.out.println(msgList.get(0).getContent());
-        adapter = new MsgAdapter(this, R.layout.msg_item, msgList);
+        //adapter = new MsgAdapter(this, R.layout.msg_item, msgList);
         inputText = (EditText)findViewById(R.id.input_text);
         send = (Button)findViewById(R.id.send);
-        msgListView = (ListView)findViewById(R.id.msg_list_view);
-        msgListView.setAdapter(adapter);
+//        msgListView = (ListView)findViewById(R.id.msg_list_view);
+//        msgListView.setAdapter(adapter);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,6 +129,16 @@ public class MessageActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        count++;
+        System.out.println(count);
+        if(count == 5000){
+            initMsgs(TargetID);
+            count = 0;
+        }
     }
     private void initMsgs(String TargetID) {
         Thread t = new Thread(){
@@ -132,6 +197,28 @@ public class MessageActivity extends AppCompatActivity {
 //        msgList.add(msg2);
 //        Msg msg3 = new Msg("33", Msg.TYPE_RECEIVED);
 //        msgList.add(msg3);
+    }
+    //开一个线程继承Thread
+    public class TimeThread extends Thread {
+        //重写run方法
+        @Override
+        public void run() {
+            super.run();
+            // do-while  一 什么什么 就
+            do {
+                try {
+                    //每隔一秒 发送一次消息
+                    Thread.sleep(1000);
+                    Message msg = new Message();
+                    //消息内容 为MSG_ONE
+                    msg.what = 1;
+                    //发送
+                    handler.sendMessage(msg);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } while (true);
+        }
     }
     private String get_msg_from_DB(String TargetID){
         String urlStr = MainActivity.global_url + "/getmsglist";
@@ -247,4 +334,6 @@ public class MessageActivity extends AppCompatActivity {
         System.out.println(message);
         return message;
     }
+
+
 }
