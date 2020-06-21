@@ -73,7 +73,7 @@ public class ListViewAdapter extends BaseAdapter {
             mList.list_name=(TextView)convertView.findViewById(R.id.list_name);
             mList.list_major=(TextView)convertView.findViewById(R.id.list_major);
             mList.list_class=(TextView)convertView.findViewById(R.id.list_class);
-            mList.list_button=(Button)convertView.findViewById(R.id.list_button);
+            //mList.list_button=(Button)convertView.findViewById(R.id.list_button);
             mList.info=(TextView)convertView.findViewById(R.id.info);
             convertView.setTag(mList);
         }else{

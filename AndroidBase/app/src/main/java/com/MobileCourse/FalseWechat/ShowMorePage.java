@@ -67,6 +67,16 @@ public class ShowMorePage extends Activity implements View.OnClickListener {
     private ArrayList<String> Skill;
 
     @Override
+    protected void onResume(){
+        super.onResume();
+        System.out.println("----------------R---------------");
+        try{
+            MessageActivity.msgAct.finish();
+        }catch(Exception e){
+            System.out.println("----------------R---------------");
+        }
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show_more_page);

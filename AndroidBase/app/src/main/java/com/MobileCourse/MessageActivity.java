@@ -37,10 +37,12 @@ import java.util.List;
 public class MessageActivity extends AppCompatActivity {
 
     private ListView msgListView;
+    public static AppCompatActivity msgAct;
     private EditText inputText;
     private Button send;
     private String TargetID;
     private String MsgStatic = "none";
+    private TimeThread tt = new TimeThread();
     private MsgAdapter adapter;
     private Handler handler = new Handler(){
         @Override
@@ -93,6 +95,7 @@ public class MessageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        msgAct = this;
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
@@ -101,7 +104,7 @@ public class MessageActivity extends AppCompatActivity {
 
 
         initMsgs(TargetID);
-        new TimeThread().start();
+        tt.start();
         adapter = new MsgAdapter(this, R.layout.msg_item, msgList);
         msgListView = (ListView)findViewById(R.id.msg_list_view);
         msgListView.setAdapter(adapter);
@@ -130,15 +133,14 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
-    public void onResume() {
-        super.onResume();
-        count++;
-        System.out.println(count);
-        if(count == 5000){
-            initMsgs(TargetID);
-            count = 0;
-        }
+    public void onPause() {
+        super.onPause();
+        //this.finish();
+        handler.removeCallbacks(tt);
+        //super.onDestroy();
+        //this.finish();
     }
     private void initMsgs(String TargetID) {
         Thread t = new Thread(){
@@ -151,7 +153,7 @@ public class MessageActivity extends AppCompatActivity {
                 System.out.println("jsonData");
                 if(jsonData==null)
                 {
-                    Toast.makeText(getApplicationContext(),"网络连接错误！",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(),"网络连接错误！",Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -180,7 +182,7 @@ public class MessageActivity extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                         System.out.println(e.toString());
-                        Toast.makeText(getApplicationContext(),"文件解析错误！",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(),"文件解析错误！",Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -204,7 +206,6 @@ public class MessageActivity extends AppCompatActivity {
         @Override
         public void run() {
             super.run();
-            // do-while  一 什么什么 就
             do {
                 try {
                     //每隔一秒 发送一次消息
@@ -216,6 +217,9 @@ public class MessageActivity extends AppCompatActivity {
                     handler.sendMessage(msg);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                }
+                if(msgAct.isFinishing()){
+                    break;
                 }
             } while (true);
         }

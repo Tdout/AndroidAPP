@@ -121,9 +121,9 @@ public class Fragment1 extends Fragment {
                 System.out.println("jsonData");
                 if(jsonData==null)
                 {
-                    Looper.prepare();
-                    Toast.makeText(getContext(),"网络连接错误！",Toast.LENGTH_SHORT).show();
-                    Looper.loop();
+                    //Looper.prepare();
+                    //Toast.makeText(getContext(),"网络连接错误！",Toast.LENGTH_SHORT).show();
+                    //Looper.loop();
                 }
                 else
                 {
@@ -154,9 +154,9 @@ public class Fragment1 extends Fragment {
                     } catch (JSONException e) {
                         e.printStackTrace();
                         System.out.println(e.toString());
-                        Looper.prepare();
-                        Toast.makeText(getContext(),"文件解析错误！",Toast.LENGTH_SHORT).show();
-                        Looper.loop();
+                        //Looper.prepare();
+                        //Toast.makeText(getContext(),"文件解析错误！",Toast.LENGTH_SHORT).show();
+                        //Looper.loop();
                     }
                 }
             }
@@ -176,7 +176,7 @@ public class Fragment1 extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(), "点击时间-SHOWMORE: " + ListData.get(i).ID, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "点击时间-SHOWMORE: " + ListData.get(i).ID, Toast.LENGTH_SHORT).show();
                 System.out.println("获取的ID： " + ListData.get(i).ID);
                 Intent intent = new Intent(getActivity(), ShowMorePage.class);
                 intent.putExtra(ID_MESSAGE, ListData.get(i).ID);
