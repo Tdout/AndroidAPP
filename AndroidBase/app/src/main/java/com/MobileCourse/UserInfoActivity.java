@@ -17,12 +17,14 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -44,9 +46,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
@@ -69,6 +74,8 @@ public class UserInfoActivity extends  AppCompatActivity{
     private TextView info_change_head;
     private String user_name, user_age, user_sex, user_email, user_grade,user_major, user_skill, user_experience;
     private String result = " ";
+    private String result1 = " ";
+    private String img;
     ActionBar actionBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +90,17 @@ public class UserInfoActivity extends  AppCompatActivity{
 
         init();
     }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        Glide.with(this).load(MainActivity.global_url+"/static/huqian17/img.jpg").
+//                apply(new RequestOptions().
+//                        placeholder(R.drawable.ic_people_nearby).
+//                        error(R.drawable.ic_people_nearby))
+//                .apply(new RequestOptions().transform(new CircleCrop()))
+//                .into(info_head);
+//
+//    }
     private void init() {
         btn_save_info = findViewById(R.id.btn_save_info);
         info_user_name = findViewById(R.id.info_user_name);
@@ -96,12 +114,102 @@ public class UserInfoActivity extends  AppCompatActivity{
         info_head = findViewById(R.id.info_head);
         info_change_head = findViewById(R.id.info_change_head);
 
-        Glide.with(this).load(MainActivity.global_url+"/static/"+MainActivity.global_login_id+"/img.jpg").
+        Glide.with(this).load(MainActivity.global_url+"/static/huqian17/img.jpg").
                 apply(new RequestOptions().
                         placeholder(R.drawable.ic_people_nearby).
                         error(R.drawable.ic_people_nearby))
                 .apply(new RequestOptions().transform(new CircleCrop()))
                 .into(info_head);
+        Thread a = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    BufferedReader reader = null;
+                    JSONObject userJSON = new JSONObject();
+                    userJSON.put("user_id", MainActivity.global_login_id);
+                    userJSON.put("identity", MainActivity.global_login_type);
+//                    userJSON.put("name", user_name);
+//                    userJSON.put("old", Integer.valueOf(user_age));
+//                    userJSON.put("sex", user_sex);
+//                    userJSON.put("email", user_email);
+//                    userJSON.put("grade", user_grade);
+//                    userJSON.put("major", user_major);
+//                    userJSON.put("skill", user_skill);
+//                    userJSON.put("experience", user_experience);
+
+                    String content = String.valueOf(userJSON);
+                    HttpURLConnection connection = (HttpURLConnection) new URL(MainActivity.global_url+"/info").openConnection();
+                    connection.setConnectTimeout(5000);
+                    connection.setRequestMethod("POST");
+                    connection.setDoOutput(true);
+                    connection.setDoInput(true);
+                    connection.setRequestProperty("Connection", "Keep-Alive");
+                    connection.setRequestProperty("Content-Type", "application/json");
+                    connection.setRequestProperty("Charset", "UTF-8");
+                    connection.setRequestProperty("accept", "application/json");
+                    if (content != null && !TextUtils.isEmpty(content)) {
+                        byte[] writebytes = content.getBytes();
+                        connection.setRequestProperty("Content-Length", String.valueOf(writebytes.length));
+                        OutputStream os = connection.getOutputStream();
+                        os.write(content.getBytes());
+                        os.flush();
+                        os.close();
+                    }
+                    if (connection.getResponseCode() == 200) {
+                        reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                        result1 = reader.readLine();
+                        System.out.println(result1);
+                    }
+                } catch (Exception e) {
+                    System.out.println("failed");
+                }
+            }
+        });
+        a.start();
+        try {
+            a.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //解析json字符串
+        try{
+            JSONObject json = new JSONObject(result1);
+            user_name = json.getString("name");
+            user_age = json.getString("old");
+            user_sex = json.getString("sex");
+            user_email = json.getString("email");
+            user_skill = json.getString("skill");
+            user_grade= json.getString("grade");
+            user_major = json.getString("major");
+            user_experience = json.getString("experience");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //初始化界面信息
+        if(user_name!=null) {
+            info_user_name.setText(user_name);
+        }
+        if(user_age!=null) {
+            info_user_age.setText(user_age);
+        }
+        if(user_sex!=null) {
+            info_user_sex.setText(user_sex);
+        }
+        if(user_email!=null) {
+            info_user_email.setText(user_email);
+        }
+        if(user_skill!=null) {
+            info_user_skill.setText(user_skill);
+        }
+        if(user_grade!=null) {
+            info_user_grade.setText(user_grade);
+        }
+        if(user_major!=null) {
+            info_user_major.setText(user_major);
+        }
+        if(user_experience!=null) {
+            info_user_experience.setText(user_experience);
+        }
 
         info_change_head.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,14 +284,14 @@ public class UserInfoActivity extends  AppCompatActivity{
                             JSONObject userJSON = new JSONObject();
                             userJSON.put("user_id", MainActivity.global_login_id);
                             userJSON.put("identity", MainActivity.global_login_type);
-                            userJSON.put("user_name", user_name);
-                            userJSON.put("user_age", user_age);
-                            userJSON.put("user_sex", user_sex);
-                            userJSON.put("user_email", user_email);
-                            userJSON.put("user_grade", user_grade);
-                            userJSON.put("user_major", user_major);
-                            userJSON.put("user_skill", user_skill);
-                            userJSON.put("user_experience", user_experience);
+                            userJSON.put("name", user_name);
+                            userJSON.put("old", Integer.valueOf(user_age));
+                            userJSON.put("sex", user_sex);
+                            userJSON.put("email", user_email);
+                            userJSON.put("grade", user_grade);
+                            userJSON.put("major", user_major);
+                            userJSON.put("skill", user_skill);
+                            userJSON.put("experience", user_experience);
 
                             String content = String.valueOf(userJSON);
                             HttpURLConnection connection = (HttpURLConnection) new URL(MainActivity.global_url+"/changeinfo").openConnection();
@@ -247,6 +355,13 @@ public class UserInfoActivity extends  AppCompatActivity{
                 // 大图切割
                 case REQUEST_BIG_IMAGE_CUTTING:
                     Bitmap bitmap = BitmapFactory.decodeFile(mImageUri.getEncodedPath());
+                    bitmap = imageScale(bitmap,60,60);
+                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG,60, bos);
+                    byte[] bytes = bos.toByteArray();
+                    img = Base64.encodeToString(bytes,Base64.DEFAULT);
+                    img = img.replaceAll("\n","").replaceAll("\r","");//.replaceAll("-","").replaceAll("_","");
+                    System.out.println(img);
                     info_head.setImageBitmap(bitmap);
                     break;
                 // 相册选取
@@ -264,6 +379,50 @@ public class UserInfoActivity extends  AppCompatActivity{
                     // startSmallPhotoZoom(Uri.fromFile(temp));
                     startBigPhotoZoom(temp);
             }
+        }
+        Thread a = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    BufferedReader reader = null;
+                    JSONObject userJSON = new JSONObject();
+                    userJSON.put("user_id", MainActivity.global_login_id);
+                    userJSON.put("identity", MainActivity.global_login_type);
+                    userJSON.put("img", img);
+
+                    String content = String.valueOf(userJSON);
+                    HttpURLConnection connection = (HttpURLConnection) new URL(MainActivity.global_url+"/uploadimg").openConnection();
+                    connection.setConnectTimeout(5000);
+                    connection.setRequestMethod("POST");
+                    connection.setDoOutput(true);
+                    connection.setDoInput(true);
+                    connection.setRequestProperty("Connection", "Keep-Alive");
+                    connection.setRequestProperty("Content-Type", "application/json");
+                    connection.setRequestProperty("Charset", "UTF-8");
+                    connection.setRequestProperty("accept", "application/json");
+                    if (content != null && !TextUtils.isEmpty(content)) {
+                        byte[] writebytes = content.getBytes();
+                        connection.setRequestProperty("Content-Length", String.valueOf(writebytes.length));
+                        OutputStream os = connection.getOutputStream();
+                        os.write(content.getBytes());
+                        os.flush();
+                        os.close();
+                    }
+                    if (connection.getResponseCode() == 200) {
+                        reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                        String re = reader.readLine();
+                        System.out.println(re);
+                    }
+                } catch (Exception e) {
+                    System.out.println("failed");
+                }
+            }
+        });
+        a.start();
+        try {
+            a.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
     @Override
@@ -405,6 +564,8 @@ public class UserInfoActivity extends  AppCompatActivity{
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri); // 返回一个文件
         intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
         // intent.putExtra("noFaceDetection", true); // no face detection
+
+
         startActivityForResult(intent, REQUEST_BIG_IMAGE_CUTTING);
     }
 
@@ -456,19 +617,37 @@ public class UserInfoActivity extends  AppCompatActivity{
                 File file = new File(dirFile, System.currentTimeMillis() + ".jpg");
                 // 保存图片
                 FileOutputStream outputStream;
+
                 try {
                     outputStream = new FileOutputStream(file);
+
                     photo.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+
+                    System.out.println(img);
                     outputStream.flush();
                     outputStream.close();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
+
             // 在视图中显示图片
             info_head.setImageBitmap(photo);
         }
     }
+
+    public static Bitmap imageScale(Bitmap bitmap, int dst_w, int dst_h) {
+        int src_w = bitmap.getWidth();
+        int src_h = bitmap.getHeight();
+        float scale_w = ((float) dst_w) / src_w;
+        float scale_h = ((float) dst_h) / src_h;
+        Matrix matrix = new Matrix();
+        matrix.postScale(scale_w, scale_h);
+        Bitmap dstbmp = Bitmap.createBitmap(bitmap, 0, 0, src_w, src_h, matrix,
+                true);
+        return dstbmp;
+    }
+
 
 
 }
