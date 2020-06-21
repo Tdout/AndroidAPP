@@ -4,4 +4,8 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="sub_menu_text_color">#000000</color>
+
+    <color name="background_gray">#ebebeb</color>
+
+    <color name="colorMainGreen">#40cab3</color>
 </resources>
