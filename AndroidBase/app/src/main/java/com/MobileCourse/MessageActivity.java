@@ -78,11 +78,11 @@ public class MessageActivity extends AppCompatActivity {
                         }
                     }).start();
                     //adapter = new MsgAdapter(MessageActivity.this, R.layout.msg_item, msgList);
-                    adapter.notifyDataSetChanged();
                     break;
                 default:
                     break;
             }
+            adapter.notifyDataSetChanged();
         }
     };
     Boolean up = false;
