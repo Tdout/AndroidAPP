@@ -119,7 +119,7 @@ public class Fragment2 extends Fragment {
                     System.out.println("jsonData");
                     if(jsonData==null)
                     {
-                        Toast.makeText(getContext(),"网络连接错误！",Toast.LENGTH_SHORT).show();
+                        System.out.println("网络连接错误");
                     }
                     else
                     {
@@ -149,7 +149,6 @@ public class Fragment2 extends Fragment {
                         } catch (Exception e) {
                             Log.e("e:", String.valueOf(e));
                             System.out.println(e.toString());
-                            Toast.makeText(getContext(),"文件解析错误！",Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
