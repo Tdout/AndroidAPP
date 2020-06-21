@@ -67,13 +67,24 @@ public class Fragment4 extends Fragment {
         return mView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        System.out.println("---------------------R---------------------");
+        Glide.with(this).load(MainActivity.global_url+"/static/"+MainActivity.global_login_id+"/img.jpg").
+                apply(new RequestOptions().
+                        placeholder(R.drawable.ic_people_nearby).
+                        error(R.drawable.ic_people_nearby))
+                .apply(new RequestOptions().transform(new CircleCrop()))
+                .into(mHHead);
+    }
 
     private void setData() {
         //设置背景磨砂效果
-        Glide.with(this).load(R.drawable.back_gradient)
-                .apply(new RequestOptions().bitmapTransform(new BlurTransformation(25,1)))
-                .apply(new RequestOptions().centerCrop())
-                .into(mHBack);
+//        Glide.with(this).load(R.drawable.back_gradient)
+//                .apply(new RequestOptions().bitmapTransform(new BlurTransformation(25,1)))
+//                .apply(new RequestOptions().centerCrop())
+//                .into(mHBack);
         //设置圆形图像
 //        Glide.with(this).load(R.drawable.head)
 //                .apply(new RequestOptions().transform(new CircleCrop()))
