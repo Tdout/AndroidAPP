@@ -101,9 +101,10 @@ public class Fragment1 extends Fragment {
     public void initData(){
         imagePath = new ArrayList<>();
         imageTitle = new ArrayList<>();
-        imagePath.add("http://e.hiphotos.baidu.com/image/pic/item/a1ec08fa513d2697e542494057fbb2fb4316d81e.jpg");
+        //imagePath.add("http://e.hiphotos.baidu.com/image/pic/item/a1ec08fa513d2697e542494057fbb2fb4316d81e.jpg");
         //imagePath.add("http://c.hiphotos.baidu.com/image/pic/item/30adcbef76094b36de8a2fe5a1cc7cd98d109d99.jpg");
-        imagePath.add(MainActivity.global_url+"/static/default/img.jpg");
+        imagePath.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1592752110327&di=a8c76ca025551f650b6d1210f04c9f91&imgtype=0&src=http%3A%2F%2Fm.tuniucdn.com%2Ffilebroker%2Fcdn%2Fvnd%2Fde%2F3c%2Fde3c52582a605da681a810fec1c86f46_w500_h280_c1_t0.jpg");
+        imagePath.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1592752297191&di=51b0eb5abb2586caa36e4d1e3d6cf2dc&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20171017%2Fb49231b96ba649388aca20187b947dd2.jpeg");
         imageTitle.add("图片1");
         imageTitle.add("图片2");
     }

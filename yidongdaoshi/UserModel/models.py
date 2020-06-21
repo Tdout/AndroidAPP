@@ -1,3 +1,4 @@
+
 from django.db import models
 
 
@@ -8,17 +9,32 @@ class Teacher(models.Model):
     user_id = models.CharField(max_length=15)
     password = models.CharField(max_length=15)
     name = models.CharField(max_length=128)
-    signature = models.TextField(max_length=128,null=True)
-    photo_url = models.TextField(null=True)
+    school = models.CharField(max_length=128)
+    old = models.IntegerField(default=0)
+    grade = models.CharField(max_length=10,default="")
+    sex = models.CharField(max_length=10,default="")
+    experience = models.CharField(max_length=256,default="")
+    major = models.CharField(max_length=256, default="")
+    email = models.CharField(max_length=128,default="")
+    skill = models.TextField(default="")
+    photo_url = models.TextField(default="")
 
 
 
 class Student(models.Model):
-    user_id = models.IntegerField(max_length=15)
+    user_id = models.CharField(max_length=15)
     password = models.CharField(max_length=15)
     name = models.CharField(max_length=128)
-    signature = models.TextField(max_length=128,null=True)
-    photo_url = models.TextField(null=True)
+    old = models.IntegerField(default=0)
+    sex = models.CharField(max_length=10,default="")
+    school = models.CharField(max_length=128)
+    grade = models.CharField(max_length=128,default="")
+    major = models.CharField(max_length=128,default="")
+    email = models.CharField(max_length=128,default="")
+    experience = models.CharField(max_length=256, default="")
+    skill = models.TextField(default="")
+    photo_url = models.TextField(default="")
+
 
     teachers = models.ManyToManyField(Teacher, through='follow')
 
@@ -34,9 +50,19 @@ class follow(models.Model):
 
 class teacherKeyword(models.Model):
     keyword = models.CharField(max_length=20)
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    Teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
 
 
 class studentKeyword(models.Model):
     keyword = models.CharField(max_length=20)
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    Student = models.ForeignKey(Student, on_delete=models.CASCADE)
+
+
+class message(models.Model):
+    content = models.TextField(max_length=256,default="")
+    send_user = models.CharField(max_length=128,default="")
+    recive_user = models.CharField(max_length=128,default="")
+    data_time = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "message"
