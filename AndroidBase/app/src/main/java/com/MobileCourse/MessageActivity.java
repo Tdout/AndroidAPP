@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.MobileCourse.Adapter.MsgAdapter;
 import com.MobileCourse.Fragments.Fragment1;
@@ -76,6 +77,8 @@ public class MessageActivity extends AppCompatActivity {
                             }
                         }
                     }).start();
+                    //adapter = new MsgAdapter(MessageActivity.this, R.layout.msg_item, msgList);
+                    adapter.notifyDataSetChanged();
                     break;
                 default:
                     break;
@@ -97,18 +100,21 @@ public class MessageActivity extends AppCompatActivity {
         TargetID = getID();
 
 
-        //initMsgs(TargetID);
+        initMsgs(TargetID);
         new TimeThread().start();
+        adapter = new MsgAdapter(this, R.layout.msg_item, msgList);
+        msgListView = (ListView)findViewById(R.id.msg_list_view);
+        msgListView.setAdapter(adapter);
         System.out.println("MSG测试");
         for(int i=0;i< msgList.size();i++){
             System.out.println(msgList.get(i).getContent());
         }
         //System.out.println(msgList.get(0).getContent());
-        adapter = new MsgAdapter(this, R.layout.msg_item, msgList);
+        //adapter = new MsgAdapter(this, R.layout.msg_item, msgList);
         inputText = (EditText)findViewById(R.id.input_text);
         send = (Button)findViewById(R.id.send);
-        msgListView = (ListView)findViewById(R.id.msg_list_view);
-        msgListView.setAdapter(adapter);
+//        msgListView = (ListView)findViewById(R.id.msg_list_view);
+//        msgListView.setAdapter(adapter);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

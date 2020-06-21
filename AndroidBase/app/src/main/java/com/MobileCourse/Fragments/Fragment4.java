@@ -19,6 +19,7 @@ import com.MobileCourse.LoginActivity;
 import com.MobileCourse.MainActivity;
 import com.MobileCourse.R;
 import com.MobileCourse.TemplateActivity1;
+import com.MobileCourse.UserInfoActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
@@ -95,12 +96,19 @@ public class Fragment4 extends Fragment {
 //        Glide.with(mHHead.getContext()).load(R.drawable.head)
 //                .bitmapTransform(new CropCircleTransformation(mHHead.getContext()))
 //                .into(mHHead);
-        Glide.with(this).load(MainActivity.global_url+"/static/"+MainActivity.global_login_id+"/img.jpg").
+        Glide.with(this).load(MainActivity.global_url+"/static/default/img.jpg").
                 apply(new RequestOptions().
                         placeholder(R.drawable.ic_people_nearby).
                         error(R.drawable.ic_people_nearby))
                 .apply(new RequestOptions().transform(new CircleCrop()))
                 .into(mHHead);
+        centerUserInfo.setItemClickListener(new ItemView.itemClickListener() {
+            @Override
+            public void itemClick(String text) {
+                Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), UserInfoActivity.class));
+            }
+        });
 
         //设置用户名整个item的点击事件
         centerFlag.setItemClickListener(new ItemView.itemClickListener() {

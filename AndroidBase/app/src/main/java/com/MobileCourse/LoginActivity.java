@@ -25,8 +25,7 @@ import java.net.URL;
 
 
 public class LoginActivity extends AppCompatActivity  {
-    private TextView tv_main_title;//标题
-    private TextView tv_back,tv_register,tv_find_psw;//返回键,显示的注册，找回密码
+    private TextView tv_register,tv_find_psw;//返回键,显示的注册，找回密码
     private Button btn_login;//登录按钮
     private String userName,psw,spPsw;//获取的用户名，密码，加密密码
     private EditText et_user_name,et_psw;//编辑框
@@ -39,15 +38,11 @@ public class LoginActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         //设置此界面为竖屏
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         init();
     }
     //获取界面控件
     private void init() {
-        //从main_title_bar中获取的id
-        tv_main_title=findViewById(R.id.tv_main_title);
-        tv_main_title.setText("登录");
-        tv_back=findViewById(R.id.tv_back);
         //从activity_login.xml中获取的
         tv_register=findViewById(R.id.tv_register);
         tv_find_psw=findViewById(R.id.tv_find_psw);
@@ -57,13 +52,13 @@ public class LoginActivity extends AppCompatActivity  {
         login_student = findViewById(R.id.login_student);
         login_teacher = findViewById(R.id.login_teacher);
         //返回键的点击事件
-        tv_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //登录界面销毁
-                LoginActivity.this.finish();
-            }
-        });
+//        tv_back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //登录界面销毁
+//                LoginActivity.this.finish();
+//            }
+//        });
         //立即注册控件的点击事件
         tv_register.setOnClickListener(new View.OnClickListener() {
             @Override
