@@ -81,17 +81,17 @@ public class Fragment4 extends Fragment {
         return mView;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        System.out.println("---------------------R---------------------");
-        Glide.with(this).load(MainActivity.global_url+"/static/"+MainActivity.global_login_id+"/img.jpg").
-                apply(new RequestOptions().
-                        placeholder(R.drawable.ic_people_nearby).
-                        error(R.drawable.ic_people_nearby))
-                .apply(new RequestOptions().transform(new CircleCrop()))
-                .into(mHHead);
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        System.out.println("---------------------R---------------------");
+//        Glide.with(this).load(MainActivity.global_url+"/static/"+MainActivity.global_login_id+"/img.jpg").
+//                apply(new RequestOptions().
+//                        placeholder(R.drawable.ic_people_nearby).
+//                        error(R.drawable.ic_people_nearby))
+//                .apply(new RequestOptions().transform(new CircleCrop()))
+//                .into(mHHead);
+//    }
 
     private void setData() {
         //设置背景磨砂效果
