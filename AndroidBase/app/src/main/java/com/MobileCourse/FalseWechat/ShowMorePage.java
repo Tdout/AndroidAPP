@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -28,6 +29,7 @@ import com.MobileCourse.Adapter.ListViewAdapter;
 import com.MobileCourse.Adapter.ShowListViewAdapter;
 import com.MobileCourse.Fragments.Fragment1;
 import com.MobileCourse.MainActivity;
+import com.MobileCourse.MessageActivity;
 import com.MobileCourse.R;
 import com.MobileCourse.utils.CommonInterface;
 import com.bumptech.glide.Glide;
@@ -54,6 +56,7 @@ public class ShowMorePage extends Activity implements View.OnClickListener {
     private TextView name;
     private TextView id;
     private Button subscribe;
+    private Button message;
     private int followType = 0;
     private String nameText =  " ";
     private String photoUrl;
@@ -75,6 +78,7 @@ public class ShowMorePage extends Activity implements View.OnClickListener {
         id =(TextView) findViewById(R.id.show_ID);
         id.setText("ID: " + TargetID);
         subscribe = findViewById(R.id.sub_btn);
+        message = findViewById(R.id.to_msg_page_btn);
         if(MainActivity.global_login_type == 1)//1是老师
         {
             subscribe.setVisibility(View.INVISIBLE);
@@ -210,6 +214,17 @@ public class ShowMorePage extends Activity implements View.OnClickListener {
                     Toast.makeText(getApplicationContext(),"按钮属性值错误",Toast.LENGTH_SHORT).show();
                     subscribe.setText("ERROR");
                 }
+            }
+        });
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Intent msgIntent = new Intent();
+                //startActivity(new Intent(ShowMorePage.this, MessageActivity.class));
+                //System.out.println("获取的ID： " + ListData.get(i).ID);
+                Intent intent = new Intent(ShowMorePage.this, MessageActivity.class);
+                intent.putExtra(Fragment1.ID_MESSAGE, TargetID);
+                startActivity(intent);
             }
         });
     }
@@ -415,5 +430,4 @@ public class ShowMorePage extends Activity implements View.OnClickListener {
         }
     }
 
-    
 }

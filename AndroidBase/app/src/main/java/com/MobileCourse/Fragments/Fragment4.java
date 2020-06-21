@@ -78,12 +78,12 @@ public class Fragment4 extends Fragment {
 //        Glide.with(this).load(R.drawable.head)
 //                .apply(new RequestOptions().transform(new CircleCrop()))
 //                .into(mHHead);
-        Glide.with(mHBack.getContext()).load(R.drawable.head)
-                .bitmapTransform(new BlurTransformation(mHBack.getContext(), 25), new CenterCrop(mHBack.getContext()))
-                .into(mHBack);
-        Glide.with(mHHead.getContext()).load(R.drawable.head)
-                .bitmapTransform(new CropCircleTransformation(mHHead.getContext()))
-                .into(mHHead);
+//        Glide.with(mHBack.getContext()).load(R.drawable.head)
+//                .bitmapTransform(new BlurTransformation(mHBack.getContext(), 25), new CenterCrop(mHBack.getContext()))
+//                .into(mHBack);
+//        Glide.with(mHHead.getContext()).load(R.drawable.head)
+//                .bitmapTransform(new CropCircleTransformation(mHHead.getContext()))
+//                .into(mHHead);
 
         //设置用户名整个item的点击事件
         centerFlag.setItemClickListener(new ItemView.itemClickListener() {

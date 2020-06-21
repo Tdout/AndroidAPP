@@ -102,8 +102,8 @@ public class Fragment1 extends Fragment {
         imagePath = new ArrayList<>();
         imageTitle = new ArrayList<>();
         imagePath.add("http://e.hiphotos.baidu.com/image/pic/item/a1ec08fa513d2697e542494057fbb2fb4316d81e.jpg");
-        //imagePath.add("http://c.hiphotos.baidu.com/image/pic/item/30adcbef76094b36de8a2fe5a1cc7cd98d109d99.jpg");
-        imagePath.add(MainActivity.global_url+"/static/huqian17/img.jpg");
+        imagePath.add("http://c.hiphotos.baidu.com/image/pic/item/30adcbef76094b36de8a2fe5a1cc7cd98d109d99.jpg");
+        //imagePath.add(MainActivity.global_url+"/static/huqian17/img.jpg");
         imageTitle.add("图片1");
         imageTitle.add("图片2");
     }
@@ -121,9 +121,7 @@ public class Fragment1 extends Fragment {
                 System.out.println("jsonData");
                 if(jsonData==null)
                 {
-                    Looper.prepare();
-                    Toast.makeText(getContext(),"网络连接错误！",Toast.LENGTH_SHORT).show();
-                    Looper.loop();
+                    System.out.println("网络连接错误");
                 }
                 else
                 {
@@ -154,9 +152,6 @@ public class Fragment1 extends Fragment {
                     } catch (JSONException e) {
                         e.printStackTrace();
                         System.out.println(e.toString());
-                        Looper.prepare();
-                        Toast.makeText(getContext(),"文件解析错误！",Toast.LENGTH_SHORT).show();
-                        Looper.loop();
                     }
                 }
             }
@@ -176,7 +171,7 @@ public class Fragment1 extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(), "点击时间-SHOWMORE: " + ListData.get(i).ID, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "点击时间-SHOWMORE: " + ListData.get(i).ID, Toast.LENGTH_SHORT).show();
                 System.out.println("获取的ID： " + ListData.get(i).ID);
                 Intent intent = new Intent(getActivity(), ShowMorePage.class);
                 intent.putExtra(ID_MESSAGE, ListData.get(i).ID);
@@ -228,8 +223,6 @@ public class Fragment1 extends Fragment {
     }
     // list 数据获取
     // 向数据库请求数据
-
-
     public static String get_list_from_DB(){
         //String params = "{\"user_id\":"+ "\"aaaa\"" + ",\"identity\":" + 2 +  "}";// 参数
         String urlStr = MainActivity.global_url + "/recommend";
@@ -325,27 +318,6 @@ public class Fragment1 extends Fragment {
             list.add(map);
         }
         return list;
-    }
-
-    public Bitmap getImage(String ID){
-        String path = MainActivity.global_url + "/static/" + ID + "/img.jpg";
-        try {
-            URL url = new URL(path);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setConnectTimeout(5000);
-            conn.setRequestMethod("GET");
-            if (conn.getResponseCode() == 200) {
-                InputStream inputStream = conn.getInputStream();
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                return bitmap;
-            }
-            return null;
-        }
-        catch (Exception e) {
-            Log.e("e:", String.valueOf(e));
-            System.out.println(e.toString());
-            return null;
-        }
     }
 
 }
