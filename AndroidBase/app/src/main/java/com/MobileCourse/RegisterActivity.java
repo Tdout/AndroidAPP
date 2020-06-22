@@ -54,13 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void init() {
-        //从main_title_bar.xml 页面布局中获取对应的UI控件
-//        tv_main_title=findViewById(R.id.tv_main_title);
-//        tv_main_title.setText("注册");
-//        tv_back=findViewById(R.id.tv_back);
-        //布局根元素
-//        rl_title_bar=findViewById(R.id.title_bar);
-//        rl_title_bar.setBackgroundColor(Color.TRANSPARENT);
+
         //从activity_register.xml 页面中获取对应的UI控件
         btn_register=findViewById(R.id.btn_register);
         et_user_name=findViewById(R.id.et_user_name);
@@ -70,14 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
         et_psw_again=findViewById(R.id.et_psw_again);
         teacher = findViewById(R.id.teacher);
         student = findViewById(R.id.student);
-//        tv_back.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //返回键
-//                RegisterActivity.this.finish();
-//            }
-//        });
-        //注册按钮
+
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

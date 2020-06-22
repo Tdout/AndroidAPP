@@ -82,11 +82,7 @@ public class LoginActivity extends AppCompatActivity  {
                 //开始登录，获取用户名和密码 getText().toString().trim();
                 userName=et_user_name.getText().toString().trim();
                 psw=et_psw.getText().toString().trim();
-                //对当前用户输入的密码进行MD5加密再进行比对判断, MD5Utils.md5( ); psw 进行加密判断是否一致
-                //String md5Psw= MD5Utils.md5(psw);
-                // md5Psw ; spPsw 为 根据从SharedPreferences中用户名读取密码
-                // 定义方法 readPsw为了读取用户名，得到密码
-                //spPsw=readPsw(userName);
+
 
                 // TextUtils.isEmpty
                 if(TextUtils.isEmpty(userName)){
@@ -100,12 +96,7 @@ public class LoginActivity extends AppCompatActivity  {
                     Toast.makeText(LoginActivity.this, "请选择身份", Toast.LENGTH_SHORT).show();
                     return;
                 }
-//                }else if((spPsw!=null&&!TextUtils.isEmpty(spPsw)&&!md5Psw.equals(spPsw))){
-//                    Toast.makeText(LoginActivity.this, "输入的用户名和密码不一致", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }else{
-//                    Toast.makeText(LoginActivity.this, "此用户名不存在", Toast.LENGTH_SHORT).show();
-//                }
+
 
                 Thread t = new Thread(new Runnable() {
                     @Override

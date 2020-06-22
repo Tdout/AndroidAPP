@@ -81,17 +81,6 @@ public class Fragment4 extends Fragment {
         return mView;
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        System.out.println("---------------------R---------------------");
-//        Glide.with(this).load(MainActivity.global_url+"/static/"+MainActivity.global_login_id+"/img.jpg").
-//                apply(new RequestOptions().
-//                        placeholder(R.drawable.ic_people_nearby).
-//                        error(R.drawable.ic_people_nearby))
-//                .apply(new RequestOptions().transform(new CircleCrop()))
-//                .into(mHHead);
-//    }
 
     private void setData() {
         //设置背景磨砂效果
@@ -160,22 +149,6 @@ public class Fragment4 extends Fragment {
             }
         });
 
-        //修改用户名item的左侧图标
-      /* mNickName.setLeftIcon(R.drawable.ic_phone);
-        //
-        mNickName.setLeftTitle("修改后的用户名");
-        mNickName.setRightDesc("名字修改");
-        mNickName.setShowRightArrow(false);
-        mNickName.setShowBottomLine(false);
-
-        //设置用户名整个item的点击事件
-        mNickName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "我是onclick事件显示的", Toast.LENGTH_SHORT).show();
-            }
-        });
-*/
 
     }
     private void initView() {
