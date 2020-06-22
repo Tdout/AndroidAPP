@@ -85,8 +85,8 @@ public class ListViewAdapter extends BaseAdapter {
 
         Glide.with(convertView).load((String) data.get(position).get("image")).
                 apply(new RequestOptions().
-                placeholder(R.drawable.ic_people_nearby).
-                        error(R.drawable.ic_people_nearby))
+                placeholder(R.drawable.login).
+                        error(R.drawable.login))
                 .into(mList.image);
         mList.list_name.setText((String)data.get(position).get("list_name"));
         mList.list_major.setText((String)data.get(position).get("list_major"));

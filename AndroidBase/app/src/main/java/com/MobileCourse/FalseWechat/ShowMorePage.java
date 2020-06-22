@@ -97,8 +97,8 @@ public class ShowMorePage extends Activity implements View.OnClickListener {
         //获取数据
         Glide.with(this).load(photoUrl).
                 apply(new RequestOptions().
-                        placeholder(R.drawable.ic_people_nearby).
-                        error(R.drawable.ic_people_nearby))
+                        placeholder(R.drawable.login).
+                        error(R.drawable.login))
                 .into(image);
         Thread t = new Thread(){
             @Override

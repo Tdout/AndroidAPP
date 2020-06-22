@@ -4,21 +4,21 @@
     <item
         android:id="@+id/navigation1"
         android:icon="@drawable/ic_page"
-        android:title="页面1" />
+        android:title="首页" />
 
     <item
-    android:id="@+id/navigation2"
-    android:icon="@drawable/ic_page"
-    android:title="页面2" />
+        android:id="@+id/navigation2"
+        android:icon="@drawable/ic_search"
+        android:title="搜索" />
 
     <item
         android:id="@+id/navigation3"
-        android:icon="@drawable/ic_page"
-        android:title="页面3" />
+        android:icon="@drawable/ic_wechat"
+        android:title="聊天" />
 
     <item
         android:id="@+id/navigation4"
-        android:icon="@drawable/ic_page"
-        android:title="页面4" />
+        android:icon="@drawable/ic_about_me"
+        android:title="个人" />
 
 </menu>
